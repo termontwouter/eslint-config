@@ -1,0 +1,50 @@
+{
+  "name": "@rubensworks/eslint-config",
+  "version": "1.0.0",
+  "description": "Personal eslint config",
+  "keywords": [
+    "eslint",
+    "eslintconfig"
+  ],
+  "main": "index.js",
+  "repository": "git@github.com:rubensworks/eslint-config.git",
+  "author": "Ruben Taelman <rubensworks@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/rubensworks/eslint-config/issues"
+  },
+  "homepage": "https://github.com/rubensworks/eslint-config#readme",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": ">=4",
+    "@typescript-eslint/parser": ">=4",
+    "eslint": ">=7",
+    "eslint-config-es": ">=3",
+    "eslint-import-resolver-typescript": ">=2",
+    "eslint-plugin-tsdoc": ">=0",
+    "eslint-plugin-import": ">=2",
+    "eslint-plugin-jest": ">=24",
+    "eslint-plugin-unused-imports": ">=0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.1.1",
+    "eslint": "^7.9.0",
+    "eslint-config-es": "^3.23.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-tsdoc": "^0.2.7",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^24.0.2",
+    "eslint-plugin-unused-imports": "^0.1.3",
+    "manual-git-changelog": "^1.0.0",
+    "typescript": "^4.0.2"
+  },
+  "scripts": {
+    "test": "echo \"NOOP\"",
+    "lint": "eslint . --ext .ts",
+    "build": "echo \"NOOP\"",
+    "version": "manual-git-changelog onversion"
+  }
+}

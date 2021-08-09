@@ -1,6 +1,6 @@
 # ESLint Config
 
-[![Build Status](https://travis-ci.org/rubensworks/eslint-config.svg?branch=master)](https://travis-ci.org/rubensworks/eslint-config)
+[![Build status](https://github.com/rubensworks/eslint-config/workflows/CI/badge.svg)](https://github.com/rubensworks/eslint-config/actions?query=workflow%3ACI)
 [![npm version](https://badge.fury.io/js/%40rubensworks%2Feslint-config.svg)](https://www.npmjs.com/package/@rubensworks/eslint-config)
 
 This is a repository for my personal [ESLint](https://eslint.org/) configurations.

@@ -8,37 +8,21 @@ This is a repository for my personal [ESLint](https://eslint.org/) configuration
 ## Install
 
 ```bash
-$ yarn add -D @rubensworks/eslint-config \
-    @typescript-eslint/eslint-plugin \
-    @typescript-eslint/parser \
-    eslint \
-    eslint-config-es \
-    eslint-import-resolver-typescript \
-    eslint-plugin-tsdoc \
-    eslint-plugin-import \
-    eslint-plugin-jest \
-    eslint-plugin-unused-imports
+$ yarn add -D @rubensworks/eslint-config eslint
 ```
 
 or
 
 ```bash
-$ npm install -D @rubensworks/eslint-config \
-    @typescript-eslint/eslint-plugin \
-    @typescript-eslint/parser \
-    eslint \
-    eslint-config-es \
-    eslint-import-resolver-typescript \
-    eslint-plugin-tsdoc \
-    eslint-plugin-import \
-    eslint-plugin-jest \
-    eslint-plugin-unused-imports
+$ npm install -D @rubensworks/eslint-config eslint
 ```
 
 ## ESLint config
 
 `.eslintrc.js`:
 ```javascript
+require("@rushstack/eslint-patch/modern-module-resolution");
+
 module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',

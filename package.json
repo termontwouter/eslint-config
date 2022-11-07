@@ -17,27 +17,25 @@
   "files": [
     "index.js"
   ],
-  "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": ">=4",
-    "@typescript-eslint/parser": ">=4",
-    "eslint": ">=7",
-    "eslint-config-es": ">=3",
-    "eslint-import-resolver-typescript": ">=2",
-    "eslint-plugin-tsdoc": ">=0",
-    "eslint-plugin-import": ">=2",
-    "eslint-plugin-jest": ">=24",
-    "eslint-plugin-unused-imports": ">=0"
+  "dependencies": {
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "eslint-config-es": "4.1.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-eslint-comments": "3.2.0",
+    "eslint-plugin-extended": "0.2.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-jest": "^26.0.0",
+    "eslint-plugin-mocha": "9.0.0",
+    "eslint-plugin-react": "7.29.3",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "eslint-plugin-tsdoc": "^0.2.14",
+    "eslint-plugin-unicorn": "37.0.1",
+    "eslint-plugin-unused-imports": "^2.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "eslint": "^7.9.0",
-    "eslint-config-es": "^3.23.0",
-    "eslint-import-resolver-typescript": "^2.3.0",
-    "eslint-plugin-tsdoc": "^0.2.7",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jest": "^24.0.2",
-    "eslint-plugin-unused-imports": "^1.0.0",
+    "eslint": "^8.3.0",
     "manual-git-changelog": "^1.0.0",
     "pre-commit": "^1.2.2",
     "typescript": "^4.0.2"

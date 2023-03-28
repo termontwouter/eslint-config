@@ -24,7 +24,9 @@ module.exports = {
         }
     },
     globals: {
-        window: false,
+        window: "off",
+        global: "off",
+        globalThis: false,
         fetch: false,
         Headers: false,
         Request: false,

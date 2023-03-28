@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+<a name="v1.2.0"></a>
+## [v1.2.0](https://github.com/rubensworks/eslint-config/compare/v1.1.0...v1.2.0) - 2023-03-28
+
+### Changed
+* [Enforce globalThis over global](https://github.com/rubensworks/eslint-config/commit/f8b623cb6ca19a14ebc6506c101fa4428eb9adda)
+
 <a name="v1.1.0"></a>
 ## [v1.1.0](https://github.com/rubensworks/eslint-config/compare/v1.0.1...v1.1.0) - 2022-11-07
 

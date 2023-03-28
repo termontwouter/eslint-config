@@ -114,6 +114,7 @@ module.exports = {
         'import/no-unused-modules': 'off',
         'unused-imports/no-unused-imports-ts': 'error',
         'import/no-extraneous-dependencies': 'error',
+        'import/no-nodejs-modules': 'error',
 
         // TODO: Try to re-enable the following rules in the future
         'global-require': 'off',
@@ -133,6 +134,7 @@ module.exports = {
                     'case': 'kebabCase'
                 }],
                 'no-process-env': 'off',
+                'unicorn/no-process-exit': 'off',
             }
         },
         {

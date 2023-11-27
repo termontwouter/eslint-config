@@ -2,7 +2,6 @@ import type { Linter } from 'eslint';
 
 import { rules as commentsRules } from './rules/comments';
 import { rules as coreRules } from './rules/core';
-import { rules as extendedRules } from './rules/extended';
 import { rules as importRules } from './rules/import';
 import { rules as mochaRules } from './rules/mocha';
 import { rules as typescriptRules } from './rules/typescript';
@@ -28,12 +27,11 @@ const env = {
 
 const settings = {};
 
-const plugins = [ 'eslint-comments', 'extended', 'import', 'mocha', 'unicorn' ];
+const plugins = [ 'eslint-comments', 'import', 'mocha', 'unicorn' ];
 
 const rules: Linter.RulesRecord = {
   ...commentsRules,
   ...coreRules,
-  ...extendedRules,
   ...importRules,
   ...mochaRules,
   ...unicornRules,

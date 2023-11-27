@@ -748,13 +748,6 @@ eslint-plugin-eslint-comments@^3.0.1:
     escape-string-regexp "^1.0.5"
     ignore "^5.0.5"
 
-eslint-plugin-extended@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-extended/-/eslint-plugin-extended-0.2.0.tgz#8aa3357976803c11c64203d5b9d2642257e38819"
-  integrity sha512-LZw2wsNiD7U6JJG23iXV7s3BKaukblPf61+FBXUlI4ANvrLAbIpwD7HzAfJgTWWYIyVHPe5UaXGJUA8o2W7Ryw==
-  dependencies:
-    varname "2.0.2"
-
 eslint-plugin-import@^2.0.1:
   version "2.29.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.29.0.tgz#8133232e4329ee344f2f612885ac3073b0b7e155"
@@ -2392,11 +2385,6 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
-
-varname@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/varname/-/varname-2.0.2.tgz#df7969952b882f6d011f85029e13b2c83e721158"
-  integrity sha512-+04KQt82uYOoagL2mutu7XYWILEQ8qhE+3zXyJN0Zz+MiuMYv8IvzVJeC4cD1RBfvVvuPPH2KH80MTFcU+cYRw==
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"

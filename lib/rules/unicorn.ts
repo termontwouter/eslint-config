@@ -14,7 +14,7 @@ export const rules: Linter.RulesRecord = {
     terms: [ 'todo' ],
     allowWarningComments: false,
   }],
-  'unicorn/explicit-length-check': [ 'error', { nonZero: 'greaterThan' }],
+  'unicorn/explicit-length-check': [ 'error', { 'non-zero': 'greater-than' }],
   'unicorn/filename-case': [ 'error', {
     cases: {
       camelCase: true,

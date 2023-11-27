@@ -30,18 +30,25 @@
     "eslint-plugin-unused-imports": "^2.0.0"
   },
   "devDependencies": {
-    "@types/eslint": "^8.44.0",
+    "@types/eslint": "^8.0.0",
     "@types/node": "^20.10.0",
-    "eslint": "^8.44.0",
-    "manual-git-changelog": "^1.0.0",
+    "eslint": "^8.0.0",
+    "manual-git-changelog": "^1.0.2",
     "pre-commit": "^1.2.2",
     "typescript": "^5.0.0"
   },
+  "peerDependencies": {
+    "eslint": "^8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint": { "optional": false }
+  },
   "scripts": {
-    "test": "echo \"NOOP\"",
-    "lint": "eslint . --ext .ts",
     "build": "tsc",
-    "version": "manual-git-changelog onversion"
+    "test": "echo \"NOOP\"",
+    "lint": "yarn build && yarn exec eslint .",
+    "version": "manual-git-changelog onversion",
+    "postinstall": "yarn build"
   },
   "pre-commit": [
     "lint"

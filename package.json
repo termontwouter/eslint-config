@@ -44,10 +44,10 @@
     "eslint": { "optional": false }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "yarn exec tsc",
     "test": "echo \"NOOP\"",
     "lint": "yarn build && yarn exec eslint .",
-    "version": "manual-git-changelog onversion",
+    "version": "yarn exec manual-git-changelog onversion",
     "postinstall": "yarn build"
   },
   "pre-commit": [

@@ -6,6 +6,10 @@ module.exports = {
         project: ['./tsconfig.eslint.json'],
     },
     extends: [
-        '.'
-    ]
+        './dist/index.js'
+    ],
+    rules: {
+        // ESLint rules are kebab-case
+        '@typescript-eslint/naming-convention': 'off',
+    }
 };

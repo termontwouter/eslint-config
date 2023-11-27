@@ -1,4 +1,4 @@
-import { Linter } from 'eslint';
+import type { Linter } from 'eslint';
 import { js as disabled, ts as shared } from './shared';
 
 export const rules: Linter.RulesRecord = {

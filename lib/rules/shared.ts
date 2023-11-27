@@ -1,4 +1,4 @@
-import { Linter } from 'eslint';
+import type { Linter } from 'eslint';
 
 const js: Linter.RulesRecord = {
   'brace-style': [ 'error', '1tbs', { allowSingleLine: false }],

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-commonjs, import/no-import-module-exports */
 
-import { Linter } from 'eslint';
+import type { Linter } from 'eslint';
 import { config as rubensworks } from './rubensworks';
 import { config as thenativeweb } from './thenativeweb';
 

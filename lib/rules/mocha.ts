@@ -1,4 +1,4 @@
-import { Linter } from 'eslint';
+import type { Linter } from 'eslint';
 
 export const rules: Linter.RulesRecord = {
   'mocha/handle-done-callback': [ 'error', { ignoreSkipped: false }],

@@ -1,4 +1,4 @@
-import { Linter } from 'eslint';
+import type { Linter } from 'eslint';
 
 import { rules as commentsRules } from './rules/comments';
 import { rules as coreRules } from './rules/core';
@@ -38,12 +38,12 @@ const rules: Linter.RulesRecord = {
   ...mochaRules,
   ...unicornRules,
   'import/noCommonjs': 'off',
-  camelcase: [ 'error', {
+  camelcase: <Linter.RuleEntry> [ 'error', {
     properties: 'always',
     ignoreDestructuring: false,
     ignoreImports: false,
     allow: [],
-  }] as Linter.RuleEntry,
+  }],
 };
 
 // This import config is necessary to make eslint-plugin-import work

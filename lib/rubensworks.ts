@@ -1,4 +1,4 @@
-import { Linter } from 'eslint';
+import type { Linter } from 'eslint';
 
 export const config: Linter.Config = {
   root: true,
@@ -90,48 +90,7 @@ export const config: Linter.Config = {
     // Incompatible with type imports
     'no-duplicate-imports': 'off',
 
-    /* TS */
-
-    '@typescript-eslint/lines-between-class-members': [ 'error' ],
-
-    // Breaks with default void in Asynchandler 2nd generic
-    '@typescript-eslint/no-invalid-void-type': 'off',
-
-    '@typescript-eslint/array-type': [ 'error', { default: 'array' }],
-    '@typescript-eslint/generic-type-naming': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
-
-    // Problems with optional parameters
-    '@typescript-eslint/no-unnecessary-condition': 'off',
-
-    '@typescript-eslint/space-before-function-paren': [ 'error', 'never' ],
-    '@typescript-eslint/promise-function-async': 'off',
-    '@typescript-eslint/consistent-type-assertions': [ 'error', { assertionStyle: 'angle-bracket' }],
-    '@typescript-eslint/member-naming': 'off',
-    '@typescript-eslint/naming-convention': [
-      'error',
-      {
-        selector: 'interface',
-        format: [ 'PascalCase' ],
-        custom: {
-          regex: '^I[A-Z]',
-          match: true,
-        },
-      },
-    ],
-    '@typescript-eslint/no-dynamic-delete': 'off',
-    '@typescript-eslint/explicit-function-return-type': [ 'error', {
-      allowExpressions: true,
-      allowTypedFunctionExpressions: true,
-      allowHigherOrderFunctions: true,
-      allowConciseArrowFunctionExpressionsStartingWithVoid: true,
-    }],
-    '@typescript-eslint/no-use-before-define': 'off',
-    '@typescript-eslint/prefer-nullish-coalescing': 'off',
-    '@typescript-eslint/consistent-type-imports': [ 'error', { prefer: 'type-imports' }],
-
     /* Import */
-
     'import/order': [ 'error', {
       alphabetize: {
         order: 'asc',
@@ -145,15 +104,62 @@ export const config: Linter.Config = {
 
     // TODO: Try to re-enable the following rules in the future
     'global-require': 'off',
-    '@typescript-eslint/no-require-imports': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
     'tsdoc/syntax': 'off',
     'unicorn/expiring-todo-comments': 'off',
     'unicorn/import-style': 'off',
 
   },
   overrides: [
+    {
+      files: [ '*.ts', '*.tsx' ],
+      rules: {
+        'lines-between-class-members': 'off',
+        '@typescript-eslint/lines-between-class-members': [ 'error' ],
+
+        // Breaks with default void in Asynchandler 2nd generic
+        '@typescript-eslint/no-invalid-void-type': 'off',
+
+        '@typescript-eslint/array-type': [ 'error', { default: 'array' }],
+        '@typescript-eslint/generic-type-naming': 'off',
+        '@typescript-eslint/no-empty-interface': 'off',
+
+        // Problems with optional parameters
+        '@typescript-eslint/no-unnecessary-condition': 'off',
+
+        'space-before-function-paren': 'off',
+        '@typescript-eslint/space-before-function-paren': [ 'error', 'never' ],
+        '@typescript-eslint/promise-function-async': 'off',
+        '@typescript-eslint/consistent-type-assertions': [ 'error', { assertionStyle: 'angle-bracket' }],
+        '@typescript-eslint/member-naming': 'off',
+        camelcase: 'off',
+        '@typescript-eslint/naming-convention': [
+          'error',
+          {
+            selector: 'interface',
+            format: [ 'PascalCase' ],
+            custom: {
+              regex: '^I[A-Z]',
+              match: true,
+            },
+          },
+        ],
+        '@typescript-eslint/no-dynamic-delete': 'off',
+        '@typescript-eslint/explicit-function-return-type': [ 'error', {
+          allowExpressions: true,
+          allowTypedFunctionExpressions: true,
+          allowHigherOrderFunctions: true,
+          allowConciseArrowFunctionExpressionsStartingWithVoid: true,
+        }],
+        '@typescript-eslint/no-use-before-define': 'off',
+        '@typescript-eslint/prefer-nullish-coalescing': 'off',
+        '@typescript-eslint/consistent-type-imports': [ 'error', { prefer: 'type-imports' }],
+
+        // TODO: Try to re-enable the following rules in the future
+        '@typescript-eslint/no-require-imports': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
     {
       // Specific rules for bin files
       files: [ '**/bin/*.ts' ],

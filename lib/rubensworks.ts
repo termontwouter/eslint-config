@@ -92,7 +92,7 @@ export const config: Linter.Config = {
 
     /* TS */
 
-    '@typescript-eslint/lines-between-class-members': [ 'error', { exceptAfterSingleLine: true }],
+    '@typescript-eslint/lines-between-class-members': [ 'error' ],
 
     // Breaks with default void in Asynchandler 2nd generic
     '@typescript-eslint/no-invalid-void-type': 'off',

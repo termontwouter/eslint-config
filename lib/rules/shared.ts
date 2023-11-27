@@ -105,7 +105,6 @@ const ts: Linter.RulesRecord = {
   }],
   '@typescript-eslint/keyword-spacing': [ 'error', { before: true, after: true }],
   '@typescript-eslint/lines-between-class-members': [ 'error', 'always', {
-    exceptAfterSingleLine: false,
     exceptAfterOverload: false,
   }],
   '@typescript-eslint/no-array-constructor': [ 'error' ],

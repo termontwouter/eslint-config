@@ -14,7 +14,7 @@ export const rules: Linter.RulesRecord = {
   '@typescript-eslint/ban-ts-comment': [ 'error', {
     'ts-ignore': true,
     'ts-nocheck': true,
-    'ts-check': 'off',
+    'ts-check': false,
   }],
   '@typescript-eslint/ban-tslint-comment': [ 'error' ],
   '@typescript-eslint/ban-types': [ 'error',
@@ -67,9 +67,6 @@ export const rules: Linter.RulesRecord = {
     ignoreVoid: false,
   }],
   '@typescript-eslint/no-for-in-array': [ 'error' ],
-  '@typescript-eslint/no-implicit-any-catch': [ 'error', {
-    allowExplicitAny: false,
-  }],
   '@typescript-eslint/no-implied-eval': [ 'error' ],
   '@typescript-eslint/no-inferrable-types': [ 'error', {
     ignoreParameters: false,

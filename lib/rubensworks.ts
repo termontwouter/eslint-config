@@ -1,20 +1,59 @@
+// import path from 'path';
+// import { fileURLToPath } from 'url';
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
+import * as tsParser from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
+import globals from 'globals';
+import configs from './configs.js';
+import plugins from './plugins.js';
 
-export const config: Linter.Config = {
-  root: true,
-  parser: '@typescript-eslint/parser',
-  parserOptions: {},
-  plugins: [
-    'eslint-plugin-tsdoc',
-    'eslint-plugin-import',
-    'eslint-plugin-jest',
-    'eslint-plugin-unused-imports',
-  ],
-  extends: [
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-  ],
+type Config = Linter.FlatConfig;
+
+const config: Config = {
+  // files: [
+  //  '**/*.ts'
+  // ],
+  // ignores: [
+  //  '**/*.d.ts',
+  //  'node_modules'
+  // ],
+  linterOptions: {
+    noInlineConfig: false,
+    reportUnusedDisableDirectives: true,
+  },
+  languageOptions: {
+    // Cast because of minor typing differences
+    // Waiting for https://github.com/typescript-eslint/typescript-eslint/pull/7935
+    parser: <Linter.ParserModule> tsParser,
+    parserOptions: {
+      // ecmaVersion: 'latest',
+      // sourceType: 'script',
+      ecmaFeatures: {
+        globalReturn: false,
+        impliedStrict: true,
+        jsx: true,
+      },
+    },
+    globals: {
+      // String globals are weirdly not supported, even though they are documented
+      // https://eslint.org/docs/latest/use/configure/configuration-files-new#configuring-global-variables
+      // window: 'off',
+      // global: 'off',
+      globalThis: false,
+      fetch: false,
+      Headers: false,
+      Request: false,
+      XMLHttpRequest: false,
+    },
+  },
+  // processor?: string | Processor;
+  plugins: {
+    'tsdoc': plugins['tsdoc'],
+    'import': plugins['import'],
+    'jest': plugins['jest'],
+    'unused-imports': plugins['unused-imports'],
+  },
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': [ '.ts', '.tsx' ],
@@ -26,15 +65,6 @@ export const config: Linter.Config = {
         alwaysTryTypes: true,
       },
     },
-  },
-  globals: {
-    window: 'off',
-    global: 'off',
-    globalThis: false,
-    fetch: false,
-    Headers: false,
-    Request: false,
-    XMLHttpRequest: false,
   },
   rules: {
 
@@ -109,105 +139,127 @@ export const config: Linter.Config = {
     'unicorn/import-style': 'off',
 
   },
-  overrides: [
-    {
-      files: [ '*.ts', '*.tsx' ],
-      rules: {
-        'lines-between-class-members': 'off',
-        '@typescript-eslint/lines-between-class-members': [ 'error' ],
-
-        // Breaks with default void in Asynchandler 2nd generic
-        '@typescript-eslint/no-invalid-void-type': 'off',
-
-        '@typescript-eslint/array-type': [ 'error', { default: 'array' }],
-        '@typescript-eslint/generic-type-naming': 'off',
-        '@typescript-eslint/no-empty-interface': 'off',
-
-        // Problems with optional parameters
-        '@typescript-eslint/no-unnecessary-condition': 'off',
-
-        'space-before-function-paren': 'off',
-        '@typescript-eslint/space-before-function-paren': [ 'error', 'never' ],
-        '@typescript-eslint/promise-function-async': 'off',
-        '@typescript-eslint/consistent-type-assertions': [ 'error', { assertionStyle: 'angle-bracket' }],
-        '@typescript-eslint/member-naming': 'off',
-        camelcase: 'off',
-        '@typescript-eslint/naming-convention': [
-          'error',
-          {
-            selector: 'interface',
-            format: [ 'PascalCase' ],
-            custom: {
-              regex: '^I[A-Z]',
-              match: true,
-            },
-          },
-        ],
-        '@typescript-eslint/no-dynamic-delete': 'off',
-        '@typescript-eslint/explicit-function-return-type': [ 'error', {
-          allowExpressions: true,
-          allowTypedFunctionExpressions: true,
-          allowHigherOrderFunctions: true,
-          allowConciseArrowFunctionExpressionsStartingWithVoid: true,
-        }],
-        '@typescript-eslint/no-use-before-define': 'off',
-        '@typescript-eslint/prefer-nullish-coalescing': 'off',
-        '@typescript-eslint/consistent-type-imports': [ 'error', { prefer: 'type-imports' }],
-
-        // TODO: Try to re-enable the following rules in the future
-        '@typescript-eslint/no-require-imports': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
-        '@typescript-eslint/no-unused-vars': 'off',
-      },
-    },
-    {
-      // Specific rules for bin files
-      files: [ '**/bin/*.ts' ],
-      rules: {
-        'unicorn/filename-case': [ 'error', {
-          case: 'kebabCase',
-        }],
-        'no-process-env': 'off',
-        'unicorn/no-process-exit': 'off',
-      },
-    },
-    {
-      /* Specific rules for test files */
-
-      files: [ '**/test/**/*.ts' ],
-      env: {
-        jest: true,
-      },
-      globals: {
-        spyOn: false,
-        fail: false,
-      },
-      rules: {
-        'mocha/no-synchronous-tests': 'off',
-        'mocha/valid-test-description': 'off',
-        'mocha/no-sibling-hooks': 'off',
-
-        'max-statements-per-line': 'off',
-        'id-length': 'off',
-        'arrow-body-style': 'off',
-        'line-comment-position': 'off',
-        'no-inline-comments': 'off',
-        'unicorn/filename-case': 'off',
-        'no-new': 'off',
-        'unicorn/no-nested-ternary': 'off',
-        'no-return-assign': 'off',
-        'no-useless-call': 'off',
-        'no-sync': 'off',
-
-        '@typescript-eslint/brace-style': 'off',
-        '@typescript-eslint/ban-ts-comment': 'off',
-        '@typescript-eslint/ban-ts-ignore': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off',
-        '@typescript-eslint/unbound-method': 'off',
-        '@typescript-eslint/no-extra-parens': 'off',
-        '@typescript-eslint/restrict-plus-operands': 'off',
-        'import/no-extraneous-dependencies': 'off',
-      },
-    },
-  ],
 };
+
+const ts: Config = {
+  files: [ '*.ts', '*.tsx' ],
+  rules: {
+    'lines-between-class-members': 'off',
+    '@typescript-eslint/lines-between-class-members': [ 'error' ],
+
+    // Breaks with default void in Asynchandler 2nd generic
+    '@typescript-eslint/no-invalid-void-type': 'off',
+
+    '@typescript-eslint/array-type': [ 'error', { default: 'array' }],
+    '@typescript-eslint/generic-type-naming': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
+
+    // Problems with optional parameters
+    '@typescript-eslint/no-unnecessary-condition': 'off',
+
+    'space-before-function-paren': 'off',
+    '@typescript-eslint/space-before-function-paren': [ 'error', 'never' ],
+    '@typescript-eslint/promise-function-async': 'off',
+    '@typescript-eslint/consistent-type-assertions': [ 'error', { assertionStyle: 'angle-bracket' }],
+    '@typescript-eslint/member-naming': 'off',
+    camelcase: 'off',
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'interface',
+        format: [ 'PascalCase' ],
+        custom: {
+          regex: '^I[A-Z]',
+          match: true,
+        },
+      },
+    ],
+    '@typescript-eslint/no-dynamic-delete': 'off',
+    '@typescript-eslint/explicit-function-return-type': [ 'error', {
+      allowExpressions: true,
+      allowTypedFunctionExpressions: true,
+      allowHigherOrderFunctions: true,
+      allowConciseArrowFunctionExpressionsStartingWithVoid: true,
+    }],
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/prefer-nullish-coalescing': 'off',
+    '@typescript-eslint/consistent-type-imports': [ 'error', { prefer: 'type-imports' }],
+
+    // TODO: Try to re-enable the following rules in the future
+    '@typescript-eslint/no-require-imports': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+  },
+};
+
+const bin: Config = {
+  // Specific rules for bin files
+  files: [ '**/bin/*.ts' ],
+  rules: {
+    'unicorn/filename-case': [ 'error', {
+      case: 'kebabCase',
+    }],
+    'no-process-env': 'off',
+    'unicorn/no-process-exit': 'off',
+  },
+};
+
+const test: Config = {
+  /* Specific rules for test files */
+
+  files: [ '**/test/**/*.ts' ],
+  languageOptions: {
+    globals: {
+      ...globals.jest,
+      spyOn: false,
+      fail: false,
+    },
+  },
+  rules: {
+    'mocha/no-synchronous-tests': 'off',
+    'mocha/valid-test-description': 'off',
+    'mocha/no-sibling-hooks': 'off',
+
+    'max-statements-per-line': 'off',
+    'id-length': 'off',
+    'arrow-body-style': 'off',
+    'line-comment-position': 'off',
+    'no-inline-comments': 'off',
+    'unicorn/filename-case': 'off',
+    'no-new': 'off',
+    'unicorn/no-nested-ternary': 'off',
+    'no-return-assign': 'off',
+    'no-useless-call': 'off',
+    'no-sync': 'off',
+
+    '@typescript-eslint/brace-style': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/no-extra-parens': 'off',
+    '@typescript-eslint/restrict-plus-operands': 'off',
+    'import/no-extraneous-dependencies': 'off',
+  },
+};
+
+// const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const compat = new FlatCompat({
+  // baseDirectory: __dirname,
+  // resolvePluginsRelativeTo: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
+});
+
+const flat: Config[] = [
+  ...compat.config(configs['import/errors']),
+  ...compat.config(configs['import/warnings']),
+  ...compat.config(configs['import/typescript']),
+  config,
+  ts,
+  bin,
+  test,
+];
+
+export default flat;

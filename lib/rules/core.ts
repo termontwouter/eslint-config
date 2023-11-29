@@ -1,5 +1,5 @@
 import type { Linter } from 'eslint';
-import { js as shared } from './shared';
+import { js as shared } from './shared.js';
 
 export const rules: Linter.RulesRecord = {
   ...shared,

@@ -87,7 +87,7 @@ const ts: Config = {
     parserOptions: {
       // ecmaVersion: 'latest',
       // sourceType: 'module',
-      project: 'tsconfig.json',
+      project: true,
       ecmaFeatures,
     },
     globals: {

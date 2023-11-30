@@ -34,6 +34,7 @@ const config: Config = {
     // Waiting for https://github.com/typescript-eslint/typescript-eslint/pull/7935
     parser: <Linter.ParserModule> tsParser,
     parserOptions: {
+      project: true,
       // ecmaVersion: 'latest',
       // sourceType: 'script',
       ecmaFeatures: {

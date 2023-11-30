@@ -11,13 +11,20 @@ import plugins from './plugins.js';
 type Config = Linter.FlatConfig;
 
 const config: Config = {
-  // files: [
-  //  '**/*.ts'
-  // ],
-  // ignores: [
-  //  '**/*.d.ts',
-  //  'node_modules'
-  // ],
+  files: [
+    '**/*.js',
+    '**/*.mjs',
+    '**/*.cjs',
+    // '**/*.jsx',
+    '**/*.ts',
+    '**/*.mts',
+    '**/*.cts',
+    // '**/*.tsx',
+  ],
+  ignores: [
+    '**/*.d.ts',
+    'node_modules',
+  ],
   linterOptions: {
     noInlineConfig: false,
     reportUnusedDisableDirectives: true,
@@ -142,7 +149,10 @@ const config: Config = {
 };
 
 const ts: Config = {
-  files: [ '*.ts', '*.tsx' ],
+  files: [
+    '**/*.ts',
+    '**/*.tsx',
+  ],
   rules: {
     'lines-between-class-members': 'off',
     '@typescript-eslint/lines-between-class-members': [ 'error' ],

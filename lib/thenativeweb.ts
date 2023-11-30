@@ -75,8 +75,8 @@ const config: Config = {
 
 const ts: Config = {
   files: [
-    '*.ts',
-    '*.tsx',
+    '**/*.ts',
+    '**/*.tsx',
   ],
   ignores: [
   ],

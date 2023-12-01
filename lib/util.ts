@@ -1,4 +1,8 @@
 
+function glob<Ext extends Extension>(ext: Ext): `**/*${Ext}` {
+  return `**/*${ext}`;
+}
+
 enum Extension {
   JS = '.js',
   MJS = '.mjs',
@@ -28,6 +32,7 @@ const ALL_SX = [ JSX, TSX ];
 const ALL = [ ...ALL_JS, ...ALL_TS ];
 
 export {
+  glob,
   Extension,
   JS,
   MJS,

@@ -4,7 +4,7 @@ import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import * as tsParser from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
-import globals from 'globals';
+import { languageOptions, settings } from './common.js';
 import configs from './configs.js';
 import plugins from './plugins.js';
 
@@ -62,18 +62,7 @@ const config: Config = {
     'jest': plugins['jest'],
     'unused-imports': plugins['unused-imports'],
   },
-  settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': [ '.ts', '.tsx' ],
-    },
-    'import/resolver': {
-      typescript: {
-        // Always try to resolve types under `<root>@types` directory
-        // even it doesn't contain any source code, like `@types/rdf-js`
-        alwaysTryTypes: true,
-      },
-    },
-  },
+  settings,
   rules: {
 
     /* Default */
@@ -219,13 +208,7 @@ const test: Config = {
   /* Specific rules for test files */
 
   files: [ '**/test/**/*.ts' ],
-  languageOptions: {
-    globals: {
-      ...globals.jest,
-      spyOn: false,
-      fail: false,
-    },
-  },
+  languageOptions,
   rules: {
     'mocha/no-synchronous-tests': 'off',
     'mocha/valid-test-description': 'off',

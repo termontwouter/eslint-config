@@ -1,6 +1,5 @@
-import * as tsParser from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
-import globals from 'globals';
+import { languageOptions, settings } from './common.js';
 import plugins from './plugins.js';
 import { rules as commentsRules } from './rules/comments.js';
 import { rules as coreRules } from './rules/core.js';
@@ -11,51 +10,19 @@ import { rules as unicornRules } from './rules/unicorn.js';
 
 type Config = Linter.FlatConfig;
 
-const ecmaFeatures = {
-  globalReturn: false,
-  impliedStrict: false,
-  jsx: true,
-};
-
-const importSettings = {
-  'import/extensions': [ '.ts', '.tsx', '.js', '.jsx' ],
-  'import/external-module-folders': [ 'node_modules', 'node_modules/@types' ],
-  'import/parsers': {
-    '@typescript-eslint/parser': [ '.ts', '.tsx' ],
-  },
-  'import/resolver': {
-    node: {
-      extensions: [ '.ts', '.tsx', '.js', '.jsx' ],
-    },
-  },
-};
-
 const config: Config = {
   // files: [],
   ignores: [
     'node_modules',
   ],
-  languageOptions: {
-    parserOptions: {
-      // ecmaVersion: 'latest',
-      // sourceType: 'script',
-      ecmaFeatures,
-    },
-    globals: {
-      ...globals.es6,
-      ...globals.mocha,
-      ...globals.node,
-    },
-  },
+  languageOptions,
   plugins: {
     'eslint-comments': plugins['eslint-comments'],
     'import': plugins['import'],
     'mocha': plugins['mocha'],
     'unicorn': plugins['unicorn'],
   },
-  settings: {
-    ...importSettings,
-  },
+  settings,
   rules: {
     ...commentsRules,
     ...coreRules,
@@ -72,7 +39,6 @@ const config: Config = {
   },
 };
 
-
 const ts: Config = {
   files: [
     '**/*.ts',
@@ -80,23 +46,7 @@ const ts: Config = {
   ],
   ignores: [
   ],
-  languageOptions: {
-  // Cast because of minor typing differences
-  // Waiting for https://github.com/typescript-eslint/typescript-eslint/pull/7935
-    parser: <Linter.ParserModule> tsParser,
-    parserOptions: {
-      // ecmaVersion: 'latest',
-      // sourceType: 'module',
-      project: true,
-      ecmaFeatures,
-    },
-    globals: {
-      ...globals.es6,
-      ...globals.mocha,
-      ...globals.node,
-      NodeJS: true,
-    },
-  },
+  languageOptions,
   plugins: {
     'eslint-comments': plugins['eslint-comments'],
     'import': plugins['import'],
@@ -104,9 +54,7 @@ const ts: Config = {
     'unicorn': plugins['unicorn'],
     '@typescript-eslint': plugins['@typescript-eslint'],
   },
-  settings: {
-    ...importSettings,
-  },
+  settings,
   rules: {
     ...typescriptRules,
     'import/no-commonjs': [ 'error' ],

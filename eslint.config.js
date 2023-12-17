@@ -15,7 +15,7 @@ const flat = [
       // Allow for consistent access with often-dash/slash-containing rulenames
       '@typescript-eslint/dot-notation': 'off',
       // Allow for consistent definition of often-dash/slash-containing rulenames
-      'quote-props': 'off',
+      '@stylistic/quote-props': 'off',
       // ESLint rules are kebab-case
       '@typescript-eslint/naming-convention': 'off',
     }

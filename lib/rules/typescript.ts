@@ -45,10 +45,6 @@ export const rules: Linter.RulesRecord = {
   }],
   '@typescript-eslint/explicit-module-boundary-types': 'off',
   '@typescript-eslint/init-declarations': 'off',
-  '@typescript-eslint/member-delimiter-style': [ 'error', {
-    multiline: { delimiter: 'semi', requireLast: true },
-    singleline: { delimiter: 'semi', requireLast: false },
-  }],
   '@typescript-eslint/member-ordering': 'off',
   '@typescript-eslint/method-signature-style': [ 'error', 'property' ],
   '@typescript-eslint/no-base-to-string': [ 'error' ],
@@ -143,11 +139,6 @@ export const rules: Linter.RulesRecord = {
   '@typescript-eslint/strict-boolean-expressions': 'off',
   '@typescript-eslint/switch-exhaustiveness-check': [ 'error' ],
   '@typescript-eslint/triple-slash-reference': [ 'error' ],
-  '@typescript-eslint/type-annotation-spacing': [ 'error', {
-    before: false,
-    after: true,
-    overrides: { arrow: { before: true, after: true }},
-  }],
   '@typescript-eslint/typedef': 'off',
   '@typescript-eslint/unbound-method': [ 'error', { ignoreStatic: true }],
   '@typescript-eslint/unified-signatures': [ 'error' ],

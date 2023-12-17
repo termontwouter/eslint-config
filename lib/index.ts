@@ -1,5 +1,3 @@
-
-
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import type { Linter } from 'eslint';
@@ -11,6 +9,7 @@ import { rules as coreRules } from './rules/core.js';
 import { rules as importRules } from './rules/import.js';
 import { rules as mochaRules } from './rules/mocha.js';
 import * as rubensworks from './rules/rubensworks.js';
+import { rules as stylisticRules } from './rules/stylistic.js';
 import { rules as typescriptRules } from './rules/typescript.js';
 import { rules as unicornRules } from './rules/unicorn.js';
 import { ALL, ALL_TS, glob } from './util.js';
@@ -36,13 +35,14 @@ const flat: Linter.FlatConfig[] = [
   {
     // thenativeweb rules
     rules: {
-      ...commentsRules,
       ...coreRules,
+      ...commentsRules,
       ...importRules,
       ...mochaRules,
       ...unicornRules,
+      ...stylisticRules,
       'import/noCommonjs': 'off',
-      camelcase: <Linter.RuleEntry> [ 'error', {
+      'camelcase': <Linter.RuleEntry> [ 'error', {
         properties: 'always',
         ignoreDestructuring: false,
         ignoreImports: false,
@@ -59,7 +59,7 @@ const flat: Linter.FlatConfig[] = [
     rules: {
       ...typescriptRules,
       'import/no-commonjs': [ 'error' ],
-      camelcase: 'off',
+      'camelcase': 'off',
       '@typescript-eslint/naming-convention': [
         'error',
         {

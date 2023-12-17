@@ -7,20 +7,20 @@ const js: Linter.RulesRecord = {
   // Conflicts with functions from interfaces that sometimes don't require `this`
   'class-methods-use-this': 'off',
 
-  'comma-dangle': [ 'error', 'always-multiline' ],
-  'dot-location': [ 'error', 'property' ],
-  'lines-between-class-members': [ 'error', 'always', {
+  '@stylistic/comma-dangle': [ 'error', 'always-multiline' ],
+  '@stylistic/dot-location': [ 'error', 'property' ],
+  '@stylistic/lines-between-class-members': [ 'error', 'always', {
     exceptAfterSingleLine: true,
   }],
 
   // Conflicts with external libraries
   'no-underscore-dangle': 'off',
 
-  'padding-line-between-statements': 'off',
+  '@stylistic/padding-line-between-statements': 'off',
   'no-param-reassign': 'off',
   'func-style': 'off',
   'new-cap': 'off',
-  'lines-around-comment': [ 'error', {
+  '@stylistic/lines-around-comment': [ 'error', {
     beforeBlockComment: false,
     afterBlockComment: false,
     beforeLineComment: false,
@@ -34,13 +34,13 @@ const js: Linter.RulesRecord = {
   'sort-imports': 'off',
 
   'prefer-named-capture-group': 'off',
-  'max-len': [ 'error', {
+  '@stylistic/max-len': [ 'error', {
     code: 120,
     ignoreTemplateLiterals: true,
   }],
   'unicorn/consistent-function-scoping': 'off',
   'no-warning-comments': 'off',
-  'no-mixed-operators': 'off',
+  '@stylistic/no-mixed-operators': 'off',
   'prefer-destructuring': 'off',
 
   // TSC already takes care of these checks
@@ -153,8 +153,7 @@ const js: Linter.RulesRecord = {
 };
 
 const ts: Linter.RulesRecord = {
-  'lines-between-class-members': 'off',
-  '@typescript-eslint/lines-between-class-members': [ 'error', 'always', {
+  '@stylistic/lines-between-class-members': [ 'error', 'always', {
     exceptAfterSingleLine: true,
     exceptAfterOverload: true,
   }],
@@ -169,8 +168,7 @@ const ts: Linter.RulesRecord = {
   // Problems with optional parameters
   '@typescript-eslint/no-unnecessary-condition': 'off',
 
-  'space-before-function-paren': 'off',
-  '@typescript-eslint/space-before-function-paren': [ 'error', 'never' ],
+  '@stylistic/space-before-function-paren': [ 'error', 'never' ],
   '@typescript-eslint/promise-function-async': 'off',
   '@typescript-eslint/consistent-type-assertions': [ 'error', { assertionStyle: 'angle-bracket' }],
   '@typescript-eslint/member-naming': 'off',
@@ -211,7 +209,7 @@ const ts: Linter.RulesRecord = {
   '@typescript-eslint/no-unsafe-argument': 'off',
   '@typescript-eslint/no-shadow': 'off',
   '@typescript-eslint/non-nullable-type-assertion-style': 'off',
-  '@typescript-eslint/object-curly-spacing': 'off',
+  '@stylistic/object-curly-spacing': 'off',
 };
 
 const bin: Linter.RulesRecord = {
@@ -232,7 +230,7 @@ const test: Linter.RulesRecord = {
   'unicorn/filename-case': 'off',
   'unicorn/no-nested-ternary': 'off',
 
-  'max-statements-per-line': 'off',
+  '@stylistic/max-statements-per-line': 'off',
   'id-length': 'off',
   'arrow-body-style': 'off',
   'line-comment-position': 'off',
@@ -242,12 +240,12 @@ const test: Linter.RulesRecord = {
   'no-useless-call': 'off',
   'no-sync': 'off',
 
-  '@typescript-eslint/brace-style': 'off',
+  '@stylistic/brace-style': 'off',
   '@typescript-eslint/ban-ts-comment': 'off',
   '@typescript-eslint/ban-ts-ignore': 'off',
   '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/unbound-method': 'off',
-  '@typescript-eslint/no-extra-parens': 'off',
+  '@stylistic/no-extra-parens': 'off',
   '@typescript-eslint/restrict-plus-operands': 'off',
   '@typescript-eslint/require-array-sort-compare': 'off',
 };

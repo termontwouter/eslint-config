@@ -1,4 +1,5 @@
 
+import pluginStylistic from '@stylistic/eslint-plugin';
 import pluginTypescript from '@typescript-eslint/eslint-plugin';
 import type { ESLint } from 'eslint';
 import pluginComments from 'eslint-plugin-eslint-comments';
@@ -18,6 +19,7 @@ const plugins: Record<string, ESLint.Plugin> = {
   '@typescript-eslint': <ESLint.Plugin> <unknown> { rules: pluginTypescript.rules },
   'unicorn': { rules: pluginUnicorn.rules },
   'unused-imports': { rules: pluginUnusedImports.rules },
+  '@stylistic': { rules: pluginStylistic.rules },
 };
 
 export default plugins;

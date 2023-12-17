@@ -40,3 +40,10 @@ declare module 'eslint-plugin-unicorn' {
   declare const plugin: Plugin;
   export = plugin;
 }
+
+declare module '@stylistic/eslint-plugin' {
+  import type { Plugin } from 'eslint';
+
+  declare const plugin: Plugin;
+  export = plugin;
+}

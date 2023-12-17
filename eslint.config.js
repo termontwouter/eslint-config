@@ -10,11 +10,14 @@ const flat = [
     rules: {
       // Some code is commented out
       'capitalized-comments': 'off',
+      // Allow for comments next to rules
+      'line-comment-position': 'off',
+      // Allow for consistent access with often-dash/slash-containing rulenames
+      '@typescript-eslint/dot-notation': 'off',
+      // Allow for consistent definition of often-dash/slash-containing rulenames
+      'quote-props': 'off',
       // ESLint rules are kebab-case
       '@typescript-eslint/naming-convention': 'off',
-      // Allow for consistency with dash/slash-containing rulenames
-      '@typescript-eslint/dot-notation': 'off',
-      'quote-props': 'off',
     }
   }
 ];

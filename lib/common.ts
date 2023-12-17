@@ -51,16 +51,21 @@ const languageOptions: Config['languageOptions'] = {
   },
 };
 
+// This is basically the same as the settings imported by extending import/typescript
 const settings: Config['settings'] = {
   'import/extensions': ALL,
+  // 'import/external-module-folders': ['node_modules', 'node_modules/@types'],
   'import/parsers': {
-    '@typescript-eslint/parser': ALL,
+    '@typescript-eslint/parser': ALL, // SHOULD only be ALL_TS
   },
   'import/resolver': {
     'eslint-import-resolver-typescript': {
       extensions: ALL,
       alwaysTryTypes: true,
     },
+    // node: {
+    //   extensions: ALL,
+    // },
   },
 };
 

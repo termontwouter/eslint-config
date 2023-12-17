@@ -82,6 +82,22 @@ const flat: Linter.FlatConfig[] = [
   ...compat.config(configs['import/errors']),
   ...compat.config(configs['import/warnings']),
   ...compat.config(configs['import/typescript']),
+  // The above extensions are the same as:
+  // {
+  //   rules: {
+  //     'import/no-unresolved': 2,
+  //     'import/named': 2,
+  //     'import/namespace': 2,
+  //     'import/default': 2,
+  //     'import/export': 2,
+
+  //     'import/no-named-as-default': 1,
+  //     'import/no-named-as-default-member': 1,
+  //     'import/no-duplicates': 1,
+
+  //     'import/named': 'off',
+  //   },
+  // },
   {
     // Overrides for all files
     files: ALL.map(ext => glob(ext)),

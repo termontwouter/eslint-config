@@ -1,7 +1,7 @@
 import * as tsParser from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
 import globals from 'globals';
-import { ALL } from './util.js';
+import { ALL, ALL_TS } from './util.js';
 
 type Config = Linter.FlatConfig;
 
@@ -9,6 +9,12 @@ const linterOptions: Config['linterOptions'] = {
   noInlineConfig: false,
   reportUnusedDisableDirectives: true,
 };
+
+function mapLegacyGlobals(globals: Record<string, boolean>): Record<string, 'writable' | 'readonly'> {
+  return Object.fromEntries(Object.entries<boolean>(globals).map(
+    ([ global, writable ]: [string, boolean]) => [ global, writable ? 'writable' : 'readonly' ],
+  ));
+}
 
 const languageOptions: Config['languageOptions'] = {
   // Cast because of minor typing differences
@@ -24,48 +30,47 @@ const languageOptions: Config['languageOptions'] = {
       jsx: true,
     },
   },
-  globals: {
-    ...globals.es6,
-    ...globals.mocha,
-    ...globals.node,
-
-    // String globals are weirdly not supported, even though they are documented
-    // https://eslint.org/docs/latest/use/configure/configuration-files-new#configuring-global-variables
-    // window: 'off',
-    // global: 'off',
+  // String globals are supported:
+  // https://eslint.org/docs/latest/use/configure/configuration-files-new#configuring-global-variables
+  globals: <any> {
+    ...mapLegacyGlobals(globals.es2015),
+    ...mapLegacyGlobals(globals.mocha),
+    ...mapLegacyGlobals(globals.node),
 
     // from original rubensworks
-    globalThis: false,
-    fetch: false,
-    Headers: false,
-    Request: false,
-    XMLHttpRequest: false,
+    window: 'off',
+    // global: 'off', // disabled in v2, but some packages rely on it
+    globalThis: 'readonly',
+    fetch: 'readonly',
+    Headers: 'readonly',
+    Request: 'readonly',
+    XMLHttpRequest: 'readonly',
 
     // for tests
-    ...globals.jest,
-    spyOn: false,
-    fail: false,
+    ...mapLegacyGlobals(globals.jest),
+    spyOn: 'readonly',
+    fail: 'readonly',
 
     // for .ts ?
-    NodeJS: true,
+    NodeJS: 'writable',
   },
 };
 
 // This is basically the same as the settings imported by extending import/typescript
 const settings: Config['settings'] = {
   'import/extensions': ALL,
-  // 'import/external-module-folders': ['node_modules', 'node_modules/@types'],
+  'import/external-module-folders': [ 'node_modules', 'node_modules/@types' ],
   'import/parsers': {
-    '@typescript-eslint/parser': ALL, // SHOULD only be ALL_TS
+    '@typescript-eslint/parser': ALL_TS,
   },
   'import/resolver': {
     'eslint-import-resolver-typescript': {
-      extensions: ALL,
+      extensions: ALL_TS,
       alwaysTryTypes: true,
     },
-    // node: {
-    //   extensions: ALL,
-    // },
+    'node': {
+      extensions: ALL,
+    },
   },
 };
 

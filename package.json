@@ -20,7 +20,8 @@
   "homepage": "https://github.com/rubensworks/eslint-config#readme",
   "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "lib"
   ],
   "resolutions": {
     "@eslint/eslintrc@*": "https://github.com/eslint/eslintrc"

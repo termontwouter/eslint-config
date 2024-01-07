@@ -26,7 +26,7 @@ export const rules: Linter.RulesRecord = {
       'nextEnv.d.ts',
     ],
   }],
-  'unicorn/import-index': [ 'error', { ignoreImports: false }],
+  // 'unicorn/import-index': [ 'error', { ignoreImports: false }], // deprecated
   'unicorn/import-style': [ 'error', {
     styles: {
       crypto: { unassigned: false, default: true, namespace: false, named: false },
@@ -65,7 +65,7 @@ export const rules: Linter.RulesRecord = {
   'unicorn/no-process-exit': [ 'error' ],
   'unicorn/no-static-only-class': [ 'error' ],
   'unicorn/no-unreadable-array-destructuring': [ 'error' ],
-  'unicorn/no-unsafe-regex': 'off',
+  // 'unicorn/no-unsafe-regex': 'off', // deprecated
   'unicorn/no-unused-properties': 'off',
   'unicorn/no-useless-fallback-in-spread': [ 'error' ],
   'unicorn/no-useless-length-check': [ 'error' ],
@@ -92,7 +92,7 @@ export const rules: Linter.RulesRecord = {
   'unicorn/prefer-dom-node-dataset': [ 'error' ],
   'unicorn/prefer-dom-node-remove': 'off',
   'unicorn/prefer-dom-node-text-content': 'off',
-  'unicorn/prefer-object-has-own': [ 'error' ],
+  // 'unicorn/prefer-object-has-own': [ 'error' ], // deprecated
   'unicorn/prefer-includes': [ 'error' ],
   'unicorn/prefer-keyboard-event-key': [ 'error' ],
   'unicorn/prefer-math-trunc': [ 'error' ],

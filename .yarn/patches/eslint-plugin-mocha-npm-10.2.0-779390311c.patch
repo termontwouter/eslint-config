@@ -1,0 +1,104 @@
+diff --git a/lib/rules/handle-done-callback.js b/lib/rules/handle-done-callback.js
+index 242dbed7691d374710666aef48a82825ddfd4dbd..cec40a29640409ccb5410954ead3304ba727edff 100644
+--- a/lib/rules/handle-done-callback.js
++++ b/lib/rules/handle-done-callback.js
+@@ -49,7 +49,7 @@ module.exports = {
+         }
+ 
+         function checkAsyncMochaFunction(functionExpression) {
+-            const scope = context.getScope();
++            const scope = context.sourceCode.getScope(node);
+             const callback = functionExpression.params[0];
+             const callbackName = callback.name;
+             const callbackVariable = findParamInScope(callbackName, scope);
+diff --git a/lib/rules/max-top-level-suites.js b/lib/rules/max-top-level-suites.js
+index 7363fab9be8641e8890177b1d859a7df5a2c2d66..48969220f7efd2fb8d21787910352e346fa0a1a8 100644
+--- a/lib/rules/max-top-level-suites.js
++++ b/lib/rules/max-top-level-suites.js
+@@ -48,7 +48,7 @@ module.exports = {
+         return {
+             CallExpression(node) {
+                 if (astUtils.isDescribe(node)) {
+-                    const scope = context.getScope();
++                    const scope = context.sourceCode.getScope(node);
+ 
+                     if (isTopLevelScope(scope)) {
+                         topLevelDescribes.push(node);
+diff --git a/lib/rules/no-empty-description.js b/lib/rules/no-empty-description.js
+index bdda4f09d902543c22fdb1ea54e4ce7c6cb062bb..c1cc6b2392239ac1290156ca5bbebb054a31c4eb 100644
+--- a/lib/rules/no-empty-description.js
++++ b/lib/rules/no-empty-description.js
+@@ -80,7 +80,7 @@ module.exports = {
+                 return false;
+             }
+ 
+-            const text = getStringIfConstant(description, context.getScope());
++            const text = getStringIfConstant(description, context.sourceCode.getScope(node));
+ 
+             if (!isStaticallyAnalyzableDescription(description, text)) {
+                 return true;
+diff --git a/lib/rules/no-global-tests.js b/lib/rules/no-global-tests.js
+index 9c22a954706498ea9f3e6b86121e85ef1d5063b4..d4ffac79553293ce22feed5267e23e28021440a4 100644
+--- a/lib/rules/no-global-tests.js
++++ b/lib/rules/no-global-tests.js
+@@ -21,7 +21,7 @@ module.exports = {
+         return {
+             CallExpression(node) {
+                 const callee = node.callee;
+-                const scope = context.getScope();
++                const scope = context.sourceCode.getScope(node);
+ 
+                 if (astUtils.isTestCase(node) && isGlobalScope(scope)) {
+                     context.report({ node: callee, message: 'Unexpected global mocha test.' });
+diff --git a/lib/rules/prefer-arrow-callback.js b/lib/rules/prefer-arrow-callback.js
+index 3d584ed92ef0630de291648b34893c8e489495cc..6c753cc1f1036a37b2ed05e039a88c1a101465a5 100644
+--- a/lib/rules/prefer-arrow-callback.js
++++ b/lib/rules/prefer-arrow-callback.js
+@@ -293,7 +293,7 @@ module.exports = {
+                 }
+ 
+                 // Skip if it's using arguments.
+-                const variable = getVariableOfArguments(context.getScope());
++                const variable = getVariableOfArguments(context.sourceCode.getScope(node));
+ 
+                 if (variable && variable.references.length > 0) {
+                     return;
+diff --git a/lib/rules/valid-suite-description.js b/lib/rules/valid-suite-description.js
+index e991a271e5e56d40b5f5ab076337b6bbdf9150c4..2c9697c3dccfe613028f3d2ad64987724a48cb95 100644
+--- a/lib/rules/valid-suite-description.js
++++ b/lib/rules/valid-suite-description.js
+@@ -83,7 +83,7 @@ module.exports = {
+         function hasValidSuiteDescription(mochaCallExpression) {
+             const args = mochaCallExpression.arguments;
+             const descriptionArgument = args[0];
+-            const description = getStringIfConstant(descriptionArgument, context.getScope());
++            const description = getStringIfConstant(descriptionArgument, context.sourceCode.getScope(node));
+ 
+             if (description) {
+                 return pattern.test(description);
+diff --git a/lib/rules/valid-test-description.js b/lib/rules/valid-test-description.js
+index 427e8c0c9f79d0691e995347802ebad381306fe6..3c8448c75602c4095bc32116eba701997b991243 100644
+--- a/lib/rules/valid-test-description.js
++++ b/lib/rules/valid-test-description.js
+@@ -82,7 +82,7 @@ module.exports = {
+         function hasValidTestDescription(mochaCallExpression) {
+             const args = mochaCallExpression.arguments;
+             const testDescriptionArgument = args[0];
+-            const description = getStringIfConstant(testDescriptionArgument, context.getScope());
++            const description = getStringIfConstant(testDescriptionArgument, context.sourceCode.getScope(node));
+ 
+             if (description) {
+                 return pattern.test(description);
+diff --git a/lib/util/ast.js b/lib/util/ast.js
+index fecc57a8637319c09aa37503d48ed031ada6d7b2..97c13a8d9ea21b7d03b906bb6a21af393c11f0ba 100644
+--- a/lib/util/ast.js
++++ b/lib/util/ast.js
+@@ -134,7 +134,7 @@ function createAstUtils(settings) {
+ 
+         return (node, context) => {
+             if (isMochaFunctionCall(node)) {
+-                const scope = context.getScope();
++                const scope = context.sourceCode.getScope(node);
+ 
+                 if (!isCallToShadowedReference(node, scope)) {
+                     return true;

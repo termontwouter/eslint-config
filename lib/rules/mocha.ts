@@ -16,11 +16,19 @@ export const rules: Linter.RulesRecord = {
   'mocha/no-return-and-callback': [ 'error' ],
   'mocha/no-return-from-async': [ 'error' ],
   'mocha/no-setup-in-describe': 'off',
-  'mocha/no-sibling-hooks': [ 'error' ],
+
+  // 'mocha/no-sibling-hooks': [ 'error' ],
   'mocha/no-skipped-tests': [ 'error' ],
-  'mocha/no-synchronous-tests': [ 'error' ],
+
+  // 'mocha/no-synchronous-tests': [ 'error' ],
   'mocha/no-top-level-hooks': [ 'error' ],
   'mocha/prefer-arrow-callback': 'off',
   'mocha/valid-suite-description': [ 'error', '[^\\.]$' ],
-  'mocha/valid-test-description': [ 'error', '\\.$' ],
+
+  // 'mocha/valid-test-description': [ 'error', '\\.$' ],
+
+  // rubensworks
+  'mocha/no-sibling-hooks': 'off',
+  'mocha/no-synchronous-tests': 'off',
+  'mocha/valid-test-description': 'off',
 };

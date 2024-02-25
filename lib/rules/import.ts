@@ -1,67 +1,66 @@
 import type { Linter } from 'eslint';
 
 export const rules: Linter.RulesRecord = {
+
+  // For TypeScript: set import/named off (= import/typescript shared config)
+
+  // Recommended errors (in CSS?)
   'import/default': [ 'error' ],
-
-  // This rule only makes sense in projects that use webpack
-  'import/dynamic-import-chunkname': 'off',
   'import/export': [ 'error' ],
-  'import/exports-last': [ 'error' ],
-  'import/extensions': [ 'error', 'never' ],
-  'import/first': [ 'error' ],
-  'import/group-exports': [ 'error' ],
+  // 'import/named': [ 'error' ], // errors in componentsjs
+  // 'import/namespace': [ 'error' ], // errors in componentsjs
+  // 'import/no-unresolved': [ 'error' ], // errors in componentsjs
 
-  // Deprecated rule, superseded by 'first'
-  'import/imports-first': 'off',
-  'import/max-dependencies': 'off',
-  'import/named': [ 'error' ],
-  'import/namespace': [ 'error' ],
-  'import/newline-after-import': [ 'error', { count: 1 }],
-  'import/no-absolute-path': [ 'error' ],
-  'import/no-amd': [ 'error' ],
-  'import/no-anonymous-default-export': [ 'error' ],
+  // Recommended warnings (in CSS?)
+  'import/no-duplicates': [ 'error' ], // antfu
+  // 'import/no-named-as-default-member': [ 'error' ], // crashes on v8->9 change
+  // 'import/no-named-as-default': [ 'error' ], // crashes on v8->9 change
 
-  // This rule is computational expensive and might slow down our IDEs, so we keep it off
-  'import/no-cycle': 'off',
-  'import/no-default-export': [ 'error' ],
-  'import/no-deprecated': [ 'error' ],
-  'import/no-duplicates': [ 'error' ],
-  'import/no-dynamic-require': [ 'error' ],
-  'import/no-extraneous-dependencies': 'off',
-  'import/no-import-module-exports': [ 'error' ],
+  // OTHER
 
-  // This rule is project specific and does not make sense to enable globally
-  'import/no-internal-modules': 'off',
-  'import/no-mutable-exports': [ 'error' ],
-  'import/no-named-as-default-member': [ 'error' ],
-  'import/no-named-as-default': [ 'error' ],
-  'import/no-named-default': [ 'error' ],
-  'import/no-named-export': 'off',
-  'import/no-namespace': 'off',
-  'import/no-nodejs-modules': 'off',
-  'import/no-relative-packages': [ 'error' ],
-  'import/no-relative-parent-imports': 'off',
-  'import/no-restricted-paths': 'off',
-  'import/no-self-import': [ 'error' ],
-  'import/no-unassigned-import': [ 'error' ],
-  'import/no-unresolved': [ 'error', {
-    commonjs: true,
-    amd: true,
-    caseSensitive: true,
-    caseSensitiveStrict: true,
+  // in CSS but not rubensworks
+  // 'import/extensions': [ 'error' ], // css | comunica: try re-enable
+  // 'import/first': 'error', // antfu
+  // 'import/no-commonjs': 'error', // comunica/css | try re-enable
+  // 'import/no-mutable-exports': 'error', // antfu
+  // 'import/no-named-default': 'error', // antfu
+  // 'import/no-self-import': 'error', // antfu
+  // 'import/no-webpack-loader-syntax': 'error', // antfu
+  // 'import/newline-after-import': [ 'error', { considerComments: true, count: 1 }], // antfu
+
+  // absent/different in CSS
+  'import/no-extraneous-dependencies': [ 'error' ], // rubensworks
+  'import/order': [ 'error', { // rubensworks | antfu: no options
+    alphabetize: {
+      order: 'asc',
+      caseInsensitive: true,
+    },
   }],
 
-  // Currently unusable, as non-found files in `ignoreExports` will actually
-  // crash the eslint process - so we have no way of defining some common paths
-  // (e.g. index.{js|ts}) that do not exit outside of this repository.
-  // Also see: https://github.com/import-js/eslint-plugin-import/issues/2128
-  'import/no-unused-modules': 'off',
-  'import/no-useless-path-segments': [ 'error' ],
-  'import/no-webpack-loader-syntax': [ 'error' ],
+  // 'import/exports-last': [ 'error' ], // thenativeweb/comunica: try re-enable
+  // 'import/group-exports': [ 'error' ], // thenativeweb/comunica: try re-enable
+  // 'import/no-nodejs-modules': 'off', // enabled in @rubensworks/eslint-config@v2.0.0
 
-  // Ordering does not support sorting by single- and multi exports like the core-features does
-  // It works by assining groups - which I guess is not what we want
-  'import/order': 'off',
-  'import/prefer-default-eport': 'off',
-  'import/unambiguous': [ 'error' ],
+  // 'import/dynamic-import-chunkname': 'off', // only for webpack projects
+  // 'import/imports-first': 'off', // deprecated, superseded by 'first'
+  // 'import/max-dependencies': 'off',
+  // 'import/no-absolute-path': [ 'error' ], // thenativeweb
+  // 'import/no-amd': [ 'error' ], // thenativeweb
+  // 'import/no-anonymous-default-export': [ 'error' ], // thenativeweb
+  // 'import/no-cycle': 'off', // computationally expensive
+  // 'import/no-default-export': [ 'error' ], // thenativeweb
+  // 'import/no-deprecated': [ 'error' ], // thenativeweb
+  // 'import/no-dynamic-require': [ 'error' ], // thenativeweb
+  // 'import/no-import-module-exports': [ 'error' ], // thenativeweb
+  // 'import/no-internal-modules': 'off', // project specific
+  // 'import/no-named-export': 'off',
+  // 'import/no-namespace': 'off',
+  // 'import/no-relative-packages': [ 'error' ], // thenativeweb
+  // 'import/no-relative-parent-imports': 'off',
+  // 'import/no-restricted-paths': 'off',
+  // 'import/no-unassigned-import': [ 'error' ], // thenativeweb
+  // 'import/no-unused-modules': 'off', // crashes on non-found files (issue #2128)
+  // 'import/no-useless-path-segments': [ 'error' ], // thenativeweb
+  // 'import/prefer-default-export': 'off',
+  // 'import/unambiguous': [ 'error' ], // thenativeweb
 };

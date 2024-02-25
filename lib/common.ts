@@ -7,7 +7,7 @@ type Config = Linter.FlatConfig;
 
 const linterOptions: Config['linterOptions'] = {
   noInlineConfig: false,
-  reportUnusedDisableDirectives: true,
+  // reportUnusedDisableDirectives: true, // TODO: re-enable
 };
 
 function mapLegacyGlobals(globals: Record<string, boolean>): Record<string, 'writable' | 'readonly'> {
@@ -17,10 +17,12 @@ function mapLegacyGlobals(globals: Record<string, boolean>): Record<string, 'wri
 }
 
 const languageOptions: Config['languageOptions'] = {
+
   // Cast because of minor typing differences
   // Waiting for https://github.com/typescript-eslint/typescript-eslint/pull/7935
   parser: <Linter.ParserModule> tsParser,
   parserOptions: {
+
     // ecmaVersion: 'latest',
     // sourceType: 'module',
     project: true,
@@ -30,6 +32,7 @@ const languageOptions: Config['languageOptions'] = {
       jsx: true,
     },
   },
+
   // String globals are supported:
   // https://eslint.org/docs/latest/use/configure/configuration-files-new#configuring-global-variables
   globals: <any> {
@@ -39,6 +42,7 @@ const languageOptions: Config['languageOptions'] = {
 
     // from original rubensworks
     window: 'off',
+
     // global: 'off', // disabled in v2, but some packages rely on it
     globalThis: 'readonly',
     fetch: 'readonly',

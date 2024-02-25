@@ -1,4 +1,3 @@
-
 declare module 'eslint-plugin-import' {
   import type { Plugin } from 'eslint';
 

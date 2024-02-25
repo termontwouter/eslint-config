@@ -1,15 +1,18 @@
 import type { Linter } from 'eslint';
 
 export const rules: Linter.RulesRecord = {
-  'eslint-comments/disable-enable-pair': [ 'error' ],
-  'eslint-comments/no-aggregating-enable': [ 'error' ],
-  'eslint-comments/no-duplicate-disable': [ 'error' ],
-  'eslint-comments/no-unlimited-disable': [ 'error' ],
+
+  // eslint-comments/recommended
+  'eslint-comments/disable-enable-pair': [ 'error' ], // !!
+  'eslint-comments/no-aggregating-enable': [ 'error' ], // antfu
+  'eslint-comments/no-duplicate-disable': [ 'error' ], // antfu
+  'eslint-comments/no-unlimited-disable': [ 'error' ], // antfu
+
+  // These are now a built-in ESLint option
+  'eslint-comments/no-unused-disable': [ 'off' ], // antfu
+  'eslint-comments/no-unused-enable': [ 'off' ],
+
   'eslint-comments/no-restricted-disable': 'off',
   'eslint-comments/no-use': 'off',
-  'eslint-comments/require-description': [ 'error' ],
-
-  // The following will be deprecated because of the built-in ESLint option
-  // 'eslint-comments/no-unused-disable': [ 'error' ],
-  // 'eslint-comments/no-unused-enable': [ 'error' ],
+  'eslint-comments/require-description': [ 'error' ], // !!
 };

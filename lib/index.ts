@@ -2,21 +2,39 @@ import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import type { Linter } from 'eslint';
 import { languageOptions, linterOptions, settings } from './common.js';
-import configs from './configs.js';
 import plugins from './plugins.js';
-import { rules as commentsRules } from './rules/comments.js';
+
+// import { rules as commentsRules } from './rules/comments.js';
 import { rules as coreRules } from './rules/core.js';
 import { rules as importRules } from './rules/import.js';
-import { rules as mochaRules } from './rules/mocha.js';
-import * as rubensworks from './rules/rubensworks.js';
 import { rules as stylisticRules } from './rules/stylistic.js';
 import { rules as typescriptRules } from './rules/typescript.js';
 import { rules as unicornRules } from './rules/unicorn.js';
-import { ALL, ALL_TS, glob } from './util.js';
+import { rules as unusedImportsRules } from './rules/unusedImports.js';
+
+// import { ALL, ALL_TS, glob } from './util.js';
 
 // const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// antfu extra's: formaters, ignores, jsdoc, node, perfectionist, sort, test, unoccs,
+// (jsonc, yarml, toml, markdown)
+// (react,  vue, svelte)
+
+// antfu-dts-overrides
+//     'eslint-comments/no-unlimited-disable': 'off',
+//     'import/no-duplicates': 'off',
+//     'no-restricted-syntax': 'off',
+//     'unused-imports/no-unused-vars': 'off',
+
+// antfu-test-overrides
+//     'no-unused-expressions': 'off',
+
+// antfu-js-overrides
+//     'ts/no-require-imports': 'off',
+//     'ts/no-var-requires': 'off',
+
 const compat = new FlatCompat({
+
   // baseDirectory: __dirname,
   // resolvePluginsRelativeTo: __dirname,
   recommendedConfig: js.configs.recommended,
@@ -26,6 +44,7 @@ const compat = new FlatCompat({
 const flat: Linter.FlatConfig[] = [
   {
     files: [ '**/*' ],
+
     // processor?: string | Processor;
     linterOptions,
     languageOptions,
@@ -33,93 +52,79 @@ const flat: Linter.FlatConfig[] = [
     settings,
   },
   {
-    // thenativeweb rules
+    files: [ '**/*' ],
+    // files: ALL.map(ext => glob(ext)),
     rules: {
+
       ...coreRules,
-      ...commentsRules,
-      ...importRules,
-      ...mochaRules,
       ...unicornRules,
+      ...unusedImportsRules,
       ...stylisticRules,
-      'import/noCommonjs': 'off',
-      'camelcase': <Linter.RuleEntry> [ 'error', {
-        properties: 'always',
-        ignoreDestructuring: false,
-        ignoreImports: false,
-        allow: [],
-      }],
+      ...importRules,
+
+      // ...commentsRules,
+      // ...mochaRules,
+
+      'extended/consistent-err-names': 'off',
+
+      'tsdoc/syntax': 'off', //  Try to re-enable
+
+      // CSS EXTRA
+      // 'jsdoc/no-multi-asterisks': [ 'error', { allowWhitespace: true }],
+      // 'node/prefer-global/buffer': 'off',
+      // 'node/prefer-global/process': 'off',
     },
   },
   {
-    // thenativeweb TS rules
+    // files: ALL_TS.map(ext => glob(ext)),
     files: [
       '**/*.ts',
       '**/*.tsx',
     ],
-    rules: {
-      ...typescriptRules,
-      'import/no-commonjs': [ 'error' ],
-      'camelcase': 'off',
-      '@typescript-eslint/naming-convention': [
-        'error',
-        {
-          selector: [ 'variableLike', 'memberLike' ],
-          format: [ 'strictCamelCase', 'StrictPascalCase' ],
-          filter: { regex: '^__html$', match: false },
-        },
-        {
-          selector: [ 'typeLike' ],
-          format: [ 'StrictPascalCase' ],
-        },
-        {
-          selector: [ 'typeParameter' ],
-          format: [ 'StrictPascalCase' ],
-          prefix: [ 'T' ],
-        },
-      ],
-    },
+    rules: typescriptRules
   },
-  ...compat.config(configs['import/errors']),
-  ...compat.config(configs['import/warnings']),
-  ...compat.config(configs['import/typescript']),
-  // The above extensions are the same as:
-  // {
-  //   rules: {
-  //     'import/no-unresolved': 2,
-  //     'import/named': 2,
-  //     'import/namespace': 2,
-  //     'import/default': 2,
-  //     'import/export': 2,
+  {
 
-  //     'import/no-named-as-default': 1,
-  //     'import/no-named-as-default-member': 1,
-  //     'import/no-duplicates': 1,
-
-  //     'import/named': 'off',
-  //   },
-  // },
-  {
-    // Overrides for all files
-    files: ALL.map(ext => glob(ext)),
-    rules: rubensworks.js,
-  },
-  {
-    // Overrides for TS files
-    files: ALL_TS.map(ext => glob(ext)),
-    rules: rubensworks.ts,
-  },
-  {
     // Specific rules for bin files
     files: [ '**/bin/*.ts' ],
-    rules: rubensworks.bin,
+    rules: {
+      'no-process-env': 'off',
+      'unicorn/filename-case': [ 'error', {
+        case: 'kebabCase',
+      }],
+      'unicorn/no-process-exit': 'off', // disabled in @rubensworks v2
+    },
   },
   {
     /* Specific rules for test files */
     files: [ '**/test/**/*.ts' ],
-    rules: rubensworks.test,
+    rules: {
+      'arrow-body-style': 'off',
+      'id-length': 'off',
+      'line-comment-position': 'off',
+      'no-inline-comments': 'off',
+      'no-new': 'off',
+      'no-return-assign': 'off',
+      'no-sync': 'off',
+      'no-useless-call': 'off',
+
+      'import/no-extraneous-dependencies': 'off',
+
+      'unicorn/filename-case': 'off',
+      'unicorn/no-nested-ternary': 'off',
+
+      '@stylistic/brace-style': 'off',
+      '@stylistic/max-statements-per-line': 'off',
+      '@stylistic/no-extra-parens': 'off',
+
+      '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/ban-ts-ignore': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/require-array-sort-compare': 'off',
+      '@typescript-eslint/restrict-plus-operands': 'off',
+      '@typescript-eslint/unbound-method': 'off',
+    },
   },
 ];
 
 export default flat;
-
-

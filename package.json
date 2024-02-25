@@ -33,9 +33,9 @@
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.0.1",
-    "@eslint/js": "^9.0.0-beta.0",
+    "@eslint/js": "^9.0.0-beta.1",
     "@stylistic/eslint-plugin": "^1.5.1",
-    "@types/eslint": "^8.56.2",
+    "@types/eslint": "^8.56.3",
     "@types/eslint__eslintrc": "^2.1.1",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.10.0",
@@ -45,7 +45,6 @@
     "eslint-plugin-eslint-comments": "^3.2",
     "eslint-plugin-import": "^2.29",
     "eslint-plugin-jest": "^27.9.0",
-    "eslint-plugin-mocha": "patch:eslint-plugin-mocha@npm%3A10.2.0#~/.yarn/patches/eslint-plugin-mocha-npm-10.2.0-779390311c.patch",
     "eslint-plugin-tsdoc": "^0.2.17",
     "eslint-plugin-unicorn": "^51",
     "eslint-plugin-unused-imports": "^3.1",
@@ -54,20 +53,17 @@
     "typescript": "^5.0.0 <5.4.0"
   },
   "devDependencies": {
-    "eslint": "^9.0.0-beta.0",
+    "eslint": "^9.0.0-beta.1",
     "manual-git-changelog": "^1.0.2",
     "pre-commit": "^1.2.2"
   },
   "peerDependencies": {
-    "eslint": ">=8.56.0"
+    "eslint": ">=8.57.0"
   },
   "peerDependenciesMeta": {
     "eslint": {
       "optional": false
     }
-  },
-  "resolutions": {
-    "eslint-plugin-mocha@npm:10.2.0": "patch:eslint-plugin-mocha@npm%3A10.2.0#.yarn/patches/eslint-plugin-mocha-npm-10.2.0-779390311c.patch"
   },
   "pre-commit": [
     "lint"

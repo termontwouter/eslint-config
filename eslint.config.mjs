@@ -18,6 +18,8 @@ const flat = [
       '@stylistic/quote-props': 'off',
       // ESLint rules are kebab-case
       '@typescript-eslint/naming-convention': 'off',
+      // Prefer 'as' casting
+      '@typescript-eslint/consistent-type-assertions': [ 'error', { assertionStyle: 'as' }],
     }
   }
 ];

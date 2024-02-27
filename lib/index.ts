@@ -1,10 +1,8 @@
-import { FlatCompat } from '@eslint/eslintrc';
-import js from '@eslint/js';
 import type { Linter } from 'eslint';
+import * as tsParser from '@typescript-eslint/parser';
 import { languageOptions, linterOptions, settings } from './common.js';
 import plugins from './plugins.js';
-
-// import { rules as commentsRules } from './rules/comments.js';
+import { rules as commentsRules } from './rules/comments.js';
 import { rules as coreRules } from './rules/core.js';
 import { rules as importRules } from './rules/import.js';
 import { rules as stylisticRules } from './rules/stylistic.js';
@@ -12,36 +10,117 @@ import { rules as typescriptRules } from './rules/typescript.js';
 import { rules as unicornRules } from './rules/unicorn.js';
 import { rules as unusedImportsRules } from './rules/unusedImports.js';
 
-// import { ALL, ALL_TS, glob } from './util.js';
+// eslint-flat-config-viewer
 
-// const __dirname = path.dirname(fileURLToPath(import.meta.url));
+/**
+ * Disabled due to conflicts:
+ * - @stylistic/block-spacing (@stylistic/object-curly-spacing)
+ *
+ * Disabled/loosened in tests:
+ * - id-length (comunica)
+ * - no-new (comunica)
+ * - no-return-assign (comunica)
+ * - line-comment-position (comunica)
+ * - arrow-body-style (comunica, componentsjs)
+ * - unicorn/filename-case (comunica, componentsjs)
+ * - unicorn/no-useless-undefined (css)
+ * - unicorn/consistent-function-scoping (comunica, componentsjs)
+ * - @stylistic/max-statements-per-line (comunica)
+ * - @typescript-eslint/ban-ts-comment (comunica)
+ * - @typescript-eslint/promise-function-async (comunica)
+ * - @typescript-eslint/naming-convention (comunica)
+ * - @typescript-eslint/unbound-method (all)
+ *
+ * Disabled due to trivial errors:
+ * - @stylistic/no-extra-parens (css)
+ * - @stylistic/no-mixed-operators (comunica)
+ * - @stylistic/no-multiple-empty-lines (comunica, componentsjs)
+ * - @stylistic/generator-star-spacing (comunica, componentsjs)
+ * - @stylistic/yield-star-spacing (comunica, componentsjs)
+ * - @stylistic/object-curly-spacing (css, componentsjs)
+ * - @stylistic/space-before-blocks (comunica)
+ * - @stylistic/type-generic-spacing (comunica)
+ * - @typescript-eslint/no-unnecessary-type-arguments (css)
+ * - @typescript-eslint/no-redeclare (componentsjs)
+ * - consistent-this (css)
+ * - no-fallthrough (componentsjs)
+ * - no-implicit-coercion (componentsjs)
+ * - no-restricted-globals (componentsjs)
+ * - object-shorthand (comunica)
+ * - unicorn/empty-brace-spaces (comunica, componentsjs)
+ * - unicorn/no-lonely-if (componentsjs)
+ * - unicorn/prefer-at (comunica, componentsjs)
+ * - unicorn/prefer-includes (componentsjs)
+ * - unicorn/prefer-node-protocol (comunica, componentsjs)
+ * - unicorn/prefer-regexp-test (componentsjs)
+ * - unicorn/prefer-spread (componentsjs)
+ * - unicorn/prefer-type-error (comunica, componentsjs)
+ * - unicorn/import-style (comunica, componentsjs)
+ * - unicorn/no-negated-condition (comunica, componentsjs)
+ * - unicorn/no-useless-promise-resolve-reject (comunica)
+ *
+ * Disabled due to minor errors:
+ * - @typescript-eslint/consistent-type-definitions (css)
+ * - @typescript-eslint/no-dynamic-delete (all, mostly comunica)
+ * - @typescript-eslint/no-floating-promises (comunica)
+ * - @typescript-eslint/no-invalid-void-type (comunica)
+ * - @typescript-eslint/switch-exhaustiveness-check (comunica, componentsjs)
+ * - @typescript-eslint/explicit-function-return-type (comunica, componentsjs)
+ * - guard-for-in (comunica, componentsjs)
+ * - no-async-promise-executor (comunica)
+ * - unicorn/prefer-native-coercion-functions (comunica, componentsjs)
+ * - unicorn/prefer-string-replace-all (comunica, componentsjs)
+ * - unicorn/no-array-callback-reference (css, comunica)
+ *
+ * Disabled due to major errors:
+ * - @stylistic/indent-binary-ops (all, mostly comunica)
+ * - @typescript-eslint/no-explicit-any (all)
+ * - @typescript-eslint/no-non-null-assertion (all)
+ * - @typescript-eslint/no-require-imports (css, componentsjs)
+ * - @typescript-eslint/no-unused-vars (all)
+ * - @typescript-eslint/no-var-requires (componentsjs)
+ * - no-multi-assign (comunica)
+ * - no-plusplus (comunica, componentsjs)
+ * - unicorn/no-array-for-each (comunica, componentsjs)
+ * - unicorn/no-array-method-this-argument (css)
+ * - unicorn/no-array-reduce (comunica, componentsjs)
+ *
+ * Loosened due to major errors:
+ * - @stylistic/arrow-parens (comunica, componentsjs)
+ * - @typescript-eslint/promise-function-async (comunica, componentsjs)
+ *
+ * Loosened due to minor errors:
+ * - @stylistic/brace-style (comunica)
+ * - @stylistic/comma-dangle (comunica)
+ * - @stylistic/quote-props (componentsjs)
+ * - @typescript-eslint/ban-ts-comment (comunica)
+ * - @typescript-eslint/no-misused-promises (comunica)
+ * - @typescript-eslint/unbound-method (comunica)
+ * - @typescript-eslint/unified-signatures (css)
+ * - array-callback-return (comunica)
+ * - yoda (comunica)
+ *
+ */
+
+// integrate use eslint-plugin-n for deprecated rules (esp. no-sync)
+// integrate use eslint-plugin-jsdoc for deprecated rules
+
+// ust jest plugin instead of mocha
 
 // antfu extra's: formaters, ignores, jsdoc, node, perfectionist, sort, test, unoccs,
 // (jsonc, yarml, toml, markdown)
 // (react,  vue, svelte)
 
-// antfu-dts-overrides
-//     'eslint-comments/no-unlimited-disable': 'off',
-//     'import/no-duplicates': 'off',
-//     'no-restricted-syntax': 'off',
-//     'unused-imports/no-unused-vars': 'off',
-
-// antfu-test-overrides
-//     'no-unused-expressions': 'off',
-
-// antfu-js-overrides
-//     'ts/no-require-imports': 'off',
-//     'ts/no-var-requires': 'off',
-
-const compat = new FlatCompat({
-
-  // baseDirectory: __dirname,
-  // resolvePluginsRelativeTo: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
+// antfu specific rules
+// 'antfu/import-dedupe': 'error',
+// 'antfu/no-import-dist': 'error', // (not on bin)
+// 'antfu/no-import-node-modules-by-path': 'error', // (not on bin)
+// 'antfu/consistent-list-newline': 'error',
+// 'antfu/if-newline': 'error',
+// 'antfu/top-level-function': 'error',
 
 const flat: Linter.FlatConfig[] = [
+  // ignores: [ 'test/assets/*', '**/*.md/**/*.ts' ]
   {
     files: [ '**/*' ],
 
@@ -62,7 +141,7 @@ const flat: Linter.FlatConfig[] = [
       ...stylisticRules,
       ...importRules,
 
-      // ...commentsRules,
+      ...commentsRules,
       // ...mochaRules,
 
       'extended/consistent-err-names': 'off',
@@ -77,52 +156,62 @@ const flat: Linter.FlatConfig[] = [
   },
   {
     // files: ALL_TS.map(ext => glob(ext)),
-    files: [
-      '**/*.ts',
-      '**/*.tsx',
-    ],
-    rules: typescriptRules
+    files: [ '**/*.ts', '**/*.tsx' ], // [ '**/*.ts' ]
+    languageOptions: {
+      // Cast because of minor typing differences (ReturnType<parseForESLint>.ast.comments can be undefined)
+      parser: tsParser as Linter.ParserModule,
+      parserOptions: {
+        project: true, // antfu: configurable
+        // tsconfigRootDir: process.cwd(), // antfu
+      },
+    },
+    rules: typescriptRules,
   },
   {
+    /* Specific rules for test files */
+    files: [ '**/test/**/*.ts' ], // [ 'test/**/*.ts' ] ['**/*.{test,spec}.ts?(x)']
+    rules: {
+      '@stylistic/brace-style': 'off',
+      '@stylistic/max-statements-per-line': [ 'error', { max: 2 }],
+      '@typescript-eslint/ban-ts-comment': [ 'error', { 'ts-expect-error': false, 'ts-ignore': false }],
+      '@typescript-eslint/naming-convention': 'off',
+      '@typescript-eslint/promise-function-async': 'off',
+      '@typescript-eslint/unbound-method': 'off',
+      'arrow-body-style': 'off',
+      'id-length': 'off',
+      'import/no-extraneous-dependencies': 'off',
+      'line-comment-position': 'off',
+      'no-new': 'off',
+      'no-return-assign': 'off',
+      'unicorn/consistent-function-scoping': 'off',
+      'unicorn/filename-case': 'off',
+      'unicorn/no-useless-undefined': [ 'error', { 'checkArguments': false }],
 
+      // Possibly enable but currently not triggered
+      // '@stylistic/no-extra-parens': 'off',
+      // '@typescript-eslint/ban-ts-ignore': 'off',
+      // '@typescript-eslint/explicit-function-return-type': 'off',
+      // '@typescript-eslint/require-array-sort-compare': 'off',
+      // '@typescript-eslint/restrict-plus-operands': 'off',
+      // 'no-inline-comments': 'off',
+      // 'no-sync': 'off',
+      // 'no-unused-expressions': 'off',
+      // 'no-useless-call': 'off',
+      // 'unicorn/no-nested-ternary': 'off',
+    },
+  },
+  {
     // Specific rules for bin files
-    files: [ '**/bin/*.ts' ],
+    files: [ '**/bin/*.ts' ], // [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`, '**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`]
     rules: {
       'no-process-env': 'off',
       'unicorn/filename-case': [ 'error', {
         case: 'kebabCase',
       }],
       'unicorn/no-process-exit': 'off', // disabled in @rubensworks v2
-    },
-  },
-  {
-    /* Specific rules for test files */
-    files: [ '**/test/**/*.ts' ],
-    rules: {
-      'arrow-body-style': 'off',
-      'id-length': 'off',
-      'line-comment-position': 'off',
-      'no-inline-comments': 'off',
-      'no-new': 'off',
-      'no-return-assign': 'off',
-      'no-sync': 'off',
-      'no-useless-call': 'off',
-
-      'import/no-extraneous-dependencies': 'off',
-
-      'unicorn/filename-case': 'off',
-      'unicorn/no-nested-ternary': 'off',
-
-      '@stylistic/brace-style': 'off',
-      '@stylistic/max-statements-per-line': 'off',
-      '@stylistic/no-extra-parens': 'off',
-
-      '@typescript-eslint/ban-ts-comment': 'off',
-      '@typescript-eslint/ban-ts-ignore': 'off',
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/require-array-sort-compare': 'off',
-      '@typescript-eslint/restrict-plus-operands': 'off',
-      '@typescript-eslint/unbound-method': 'off',
+      // 'no-console': 'off',
+      // 'antfu/no-import-dist': 'off',
+      // 'antfu/no-import-node-modules-by-path': 'off',
     },
   },
 ];

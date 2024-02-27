@@ -15,7 +15,7 @@ const plugins: Record<string, ESLint.Plugin> = {
 
   // 'mocha': { rules: pluginMocha.rules },
   'tsdoc': { rules: pluginTsdoc.rules },
-  '@typescript-eslint': <ESLint.Plugin> <unknown> { rules: pluginTypescript.rules },
+  '@typescript-eslint': ({ rules: pluginTypescript.rules } as unknown) as ESLint.Plugin,
   'unicorn': { rules: pluginUnicorn.rules },
   'unused-imports': { rules: pluginUnusedImports.rules },
   '@stylistic': { rules: pluginStylistic.rules },

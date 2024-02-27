@@ -1,4 +1,3 @@
-import * as tsParser from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
 import globals from 'globals';
 import { ALL, ALL_TS } from './util.js';
@@ -7,7 +6,7 @@ type Config = Linter.FlatConfig;
 
 const linterOptions: Config['linterOptions'] = {
   noInlineConfig: false,
-  // reportUnusedDisableDirectives: true, // TODO: re-enable
+  // reportUnusedDisableDirectives: true, // TODO: re-enable (antfu)
 };
 
 function mapLegacyGlobals(globals: Record<string, boolean>): Record<string, 'writable' | 'readonly'> {
@@ -17,15 +16,12 @@ function mapLegacyGlobals(globals: Record<string, boolean>): Record<string, 'wri
 }
 
 const languageOptions: Config['languageOptions'] = {
+  // sourceType: 'module', // antfu (but should be in parserOptions?)
+  // ecmaVersion: 'latest', // antfu: 2022 (but should be in parserOptions?)
 
-  // Cast because of minor typing differences
-  // Waiting for https://github.com/typescript-eslint/typescript-eslint/pull/7935
-  parser: <Linter.ParserModule> tsParser,
   parserOptions: {
-
-    // ecmaVersion: 'latest',
-    // sourceType: 'module',
-    project: true,
+    // ecmaVersion: 'latest', // antfu: 2022
+    // sourceType: 'module', // antfu
     ecmaFeatures: {
       globalReturn: false,
       impliedStrict: true,
@@ -35,13 +31,19 @@ const languageOptions: Config['languageOptions'] = {
 
   // String globals are supported:
   // https://eslint.org/docs/latest/use/configure/configuration-files-new#configuring-global-variables
-  globals: <any> {
-    ...mapLegacyGlobals(globals.es2015),
+  globals: {
+    ...mapLegacyGlobals(globals.es2015), // antfu: es2021
     ...mapLegacyGlobals(globals.mocha),
     ...mapLegacyGlobals(globals.node),
+    // ...mapLegacyGlobals(globals.browser), // antfu
 
     // from original rubensworks
     window: 'off',
+
+    // antfu
+    // document: 'readonly',
+    // navigator: 'readonly',
+    // window: 'readonly',
 
     // global: 'off', // disabled in v2, but some packages rely on it
     globalThis: 'readonly',
@@ -57,7 +59,7 @@ const languageOptions: Config['languageOptions'] = {
 
     // for .ts ?
     NodeJS: 'writable',
-  },
+  } as any,
 };
 
 // This is basically the same as the settings imported by extending import/typescript

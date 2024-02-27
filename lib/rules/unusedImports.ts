@@ -2,7 +2,6 @@ import type { Linter } from 'eslint';
 
 export const rules: Linter.RulesRecord = {
 
-  // already in CSS
   'unused-imports/no-unused-imports': 'error',
 
   // enabled with  major errors

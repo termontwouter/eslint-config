@@ -39,3 +39,10 @@ declare module '@stylistic/eslint-plugin' {
   declare const plugin: Plugin;
   export = plugin;
 }
+
+declare module 'eslint-plugin-n' {
+  import type { Plugin } from 'eslint';
+
+  declare const plugin: Plugin;
+  export = plugin;
+}

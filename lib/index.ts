@@ -6,6 +6,7 @@ import { rules as commentsRules } from './rules/comments.js';
 import { rules as coreRules } from './rules/core.js';
 import { rules as importRules } from './rules/import.js';
 import { rules as jestRules } from './rules/jest.js';
+import { rules as nodeRules } from './rules/node.js';
 import { rules as stylisticRules } from './rules/stylistic.js';
 import { rules as typescriptRules } from './rules/typescript.js';
 import { rules as unicornRules } from './rules/unicorn.js';
@@ -65,6 +66,9 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - jest/no-mocks-import (comunica)
  * - jest/no-standalone-expect (comunica)
  * - jest/valid-expect (comunica)
+ * - n/no-deprecated-api (comunica)
+ * - n/no-unpublished-import (componentsjs)
+ * - n/shebang (comunica, componentsjs)
  *
  * Disabled due to minor errors:
  * - @typescript-eslint/consistent-type-definitions (css)
@@ -81,6 +85,12 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - jest/expect-expect (css, comunica)
  * - jest/no-alias-methods (comunica, componentsjs)
  * - jest/prefer-to-have-length (comunica, componentsjs)
+ * - n/callback-return (all)
+ * - n/no-process-exit (all)
+ * - n/global-require (all)
+ * - n/no-path-concat (comunica, componentsjs)
+ * - n/no-process-env (css, comunica)
+ * - n/no-sync (all)
  *
  * Disabled due to major errors:
  * - @stylistic/indent-binary-ops (all, mostly comunica)
@@ -97,6 +107,9 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - jest/prefer-to-be (all)
  * - jest/no-test-return-statement (comunica)
  * - jest/require-top-level-describe (comunica)
+ * - n/no-extraneous-import (all)
+ * - n/no-extraneous-require (comunica, componentsjs)
+ * - n/no-missing-import (all)
  *
  * Loosened due to major errors:
  * - @stylistic/arrow-parens (comunica, componentsjs)
@@ -116,10 +129,7 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  *
  */
 
-// integrate use eslint-plugin-n for deprecated rules (esp. no-sync)
 // integrate use eslint-plugin-jsdoc for deprecated rules
-
-// ust jest plugin instead of mocha
 
 // antfu extra's: formaters, ignores, jsdoc, node, perfectionist, sort, test, unoccs,
 // (jsonc, yarml, toml, markdown)
@@ -150,11 +160,12 @@ const flat: Linter.FlatConfig[] = [
     rules: {
 
       ...coreRules,
-      ...unicornRules,
+      ...nodeRules,
+      ...importRules,
       ...unusedImportsRules,
       ...stylisticRules,
-      ...importRules,
       ...commentsRules,
+      ...unicornRules,
 
       'extended/consistent-err-names': 'off',
 

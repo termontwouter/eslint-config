@@ -69,6 +69,8 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - jest/valid-expect (comunica)
  * - n/no-deprecated-api (comunica)
  * - n/no-unpublished-import (componentsjs)
+ * - n/prefer-global/process (css, comunica)
+ * - n/prefer-global/url (css, comunica)
  * - n/shebang (comunica, componentsjs)
  * - jsdoc/tag-lines (all)
  * - jsdoc/check-alignmentomunica)
@@ -144,9 +146,7 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  *
  */
 
-// antfu extra's: formaters, ignores, perfectionist, unoccs,
-// (jsonc + sort, yarml, toml, markdown)
-// (react,  vue, svelte)
+// (formaters, jsonc + sort, yarml, toml, markdown, unoccs)
 
 // antfu specific rules
 // 'antfu/import-dedupe': 'error',

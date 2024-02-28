@@ -31,12 +31,16 @@ export const rules: Linter.RulesRecord = {
   'n/handle-callback-err': 'error',
   'n/no-mixed-requires': 'error',
   'n/no-new-require': 'error',
-
-  // 'n/prefer-global/buffer': ['error', 'never'],
-  // 'n/prefer-global/process': ['error', 'never'],
+  'n/prefer-global/buffer': [ 'error', 'always' ],
+  'n/prefer-global/console': [ 'error', 'always' ],
+  'n/prefer-global/text-decoder': [ 'error', 'always' ],
+  'n/prefer-global/text-encoder': [ 'error', 'always' ],
+  'n/prefer-global/url-search-params': [ 'error', 'always' ],
 
   // trivial errors
   // 'n/callback-return': 'error', // (all)
+  // 'n/prefer-global/process': [ 'error', 'always' ], // (css, comunica)
+  // 'n/prefer-global/url': [ 'error', 'always' ], // (css, comunica)
 
   // minor errors
   // 'n/global-require': 'error', // (all)

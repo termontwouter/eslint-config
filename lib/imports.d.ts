@@ -40,6 +40,13 @@ declare module '@stylistic/eslint-plugin' {
   export = plugin;
 }
 
+declare module 'eslint-plugin-perfectionist' {
+  import type { Plugin } from 'eslint';
+
+  declare const plugin: Plugin;
+  export = plugin;
+}
+
 declare module 'eslint-plugin-jsdoc' {
   import type { Plugin } from 'eslint';
 

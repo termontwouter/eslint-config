@@ -5,6 +5,7 @@ import plugins from './plugins.js';
 import { rules as commentsRules } from './rules/comments.js';
 import { rules as coreRules } from './rules/core.js';
 import { rules as importRules } from './rules/import.js';
+import { rules as jestRules } from './rules/jest.js';
 import { rules as stylisticRules } from './rules/stylistic.js';
 import { rules as typescriptRules } from './rules/typescript.js';
 import { rules as unicornRules } from './rules/unicorn.js';
@@ -58,6 +59,12 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - unicorn/import-style (comunica, componentsjs)
  * - unicorn/no-negated-condition (comunica, componentsjs)
  * - unicorn/no-useless-promise-resolve-reject (comunica)
+ * - jest/no-conditional-expect (comunica, componentsjs)
+ * - jest/no-done-callback (comunica)
+ * - jest/no-jasmine-globals (comunica)
+ * - jest/no-mocks-import (comunica)
+ * - jest/no-standalone-expect (comunica)
+ * - jest/valid-expect (comunica)
  *
  * Disabled due to minor errors:
  * - @typescript-eslint/consistent-type-definitions (css)
@@ -71,6 +78,9 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - unicorn/prefer-native-coercion-functions (comunica, componentsjs)
  * - unicorn/prefer-string-replace-all (comunica, componentsjs)
  * - unicorn/no-array-callback-reference (css, comunica)
+ * - jest/expect-expect (css, comunica)
+ * - jest/no-alias-methods (comunica, componentsjs)
+ * - jest/prefer-to-have-length (comunica, componentsjs)
  *
  * Disabled due to major errors:
  * - @stylistic/indent-binary-ops (all, mostly comunica)
@@ -84,16 +94,20 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - unicorn/no-array-for-each (comunica, componentsjs)
  * - unicorn/no-array-method-this-argument (css)
  * - unicorn/no-array-reduce (comunica, componentsjs)
+ * - jest/prefer-to-be (all)
+ * - jest/no-test-return-statement (comunica)
+ * - jest/require-top-level-describe (comunica)
  *
  * Loosened due to major errors:
  * - @stylistic/arrow-parens (comunica, componentsjs)
  * - @typescript-eslint/promise-function-async (comunica, componentsjs)
+ * - jest/valid-title (css, comunica)
  *
  * Loosened due to minor errors:
  * - @stylistic/brace-style (comunica)
  * - @stylistic/comma-dangle (comunica)
  * - @stylistic/quote-props (componentsjs)
- * - @typescript-eslint/ban-ts-comment (comunica)
+ * - @typescript-eslint/ban-ts-comment (componentsjs)
  * - @typescript-eslint/no-misused-promises (comunica)
  * - @typescript-eslint/unbound-method (comunica)
  * - @typescript-eslint/unified-signatures (css)
@@ -140,9 +154,7 @@ const flat: Linter.FlatConfig[] = [
       ...unusedImportsRules,
       ...stylisticRules,
       ...importRules,
-
       ...commentsRules,
-      // ...mochaRules,
 
       'extended/consistent-err-names': 'off',
 
@@ -171,6 +183,8 @@ const flat: Linter.FlatConfig[] = [
     /* Specific rules for test files */
     files: [ '**/test/**/*.ts' ], // [ 'test/**/*.ts' ] ['**/*.{test,spec}.ts?(x)']
     rules: {
+      ...jestRules,
+
       '@stylistic/brace-style': 'off',
       '@stylistic/max-statements-per-line': [ 'error', { max: 2 }],
       '@typescript-eslint/ban-ts-comment': [ 'error', { 'ts-expect-error': false, 'ts-ignore': false }],

@@ -32,6 +32,9 @@ export const rules: Linter.RulesRecord = {
   'n/no-mixed-requires': 'error',
   'n/no-new-require': 'error',
 
+  // 'n/prefer-global/buffer': ['error', 'never'],
+  // 'n/prefer-global/process': ['error', 'never'],
+
   // trivial errors
   // 'n/callback-return': 'error', // (all)
 

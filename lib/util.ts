@@ -1,3 +1,7 @@
+/**
+ *
+ * @param ext
+ */
 function glob<Ext extends Extension>(ext: Ext): `**/*${Ext}` {
   return `**/*${ext}`;
 }

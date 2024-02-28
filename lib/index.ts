@@ -6,6 +6,7 @@ import { rules as commentsRules } from './rules/comments.js';
 import { rules as coreRules } from './rules/core.js';
 import { rules as importRules } from './rules/import.js';
 import { rules as jestRules } from './rules/jest.js';
+import { rules as jsdocRules, tsOverrides as jsdocTsRules } from './rules/jsdoc.js';
 import { rules as nodeRules } from './rules/node.js';
 import { rules as stylisticRules } from './rules/stylistic.js';
 import { rules as typescriptRules } from './rules/typescript.js';
@@ -69,6 +70,15 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - n/no-deprecated-api (comunica)
  * - n/no-unpublished-import (componentsjs)
  * - n/shebang (comunica, componentsjs)
+ * - jsdoc/tag-lines (all)
+ * - jsdoc/check-alignmentomunica)
+ * - jsdoc/check-tag-names (all)
+ * - jsdoc/check-param-names (comunica, componentsjs)
+ * - jsdoc/no-multi-asterisks (css, componentsjs)
+ * - jsdoc/require-param-name (componentsjs)
+ * - jsdoc/require-param-description (all)
+ * - jsdoc/require-returns-description (comunica)
+ * - jsdoc/valid-types (css, comunica)
  *
  * Disabled due to minor errors:
  * - @typescript-eslint/consistent-type-definitions (css)
@@ -91,6 +101,7 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - n/no-path-concat (comunica, componentsjs)
  * - n/no-process-env (css, comunica)
  * - n/no-sync (all)
+ * - jsdoc/require-jsdoc (all)
  *
  * Disabled due to major errors:
  * - @stylistic/indent-binary-ops (all, mostly comunica)
@@ -110,6 +121,10 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  * - n/no-extraneous-import (all)
  * - n/no-extraneous-require (comunica, componentsjs)
  * - n/no-missing-import (all)
+ * - jsdoc/require-param (all)
+ * - jsdoc/require-returns (all)
+ * - jsdoc/require-yields (all)
+ * - jsdoc/no-types (all)
  *
  * Loosened due to major errors:
  * - @stylistic/arrow-parens (comunica, componentsjs)
@@ -129,10 +144,8 @@ import { rules as unusedImportsRules } from './rules/unusedImports.js';
  *
  */
 
-// integrate use eslint-plugin-jsdoc for deprecated rules
-
-// antfu extra's: formaters, ignores, jsdoc, node, perfectionist, sort, test, unoccs,
-// (jsonc, yarml, toml, markdown)
+// antfu extra's: formaters, ignores, perfectionist, unoccs,
+// (jsonc + sort, yarml, toml, markdown)
 // (react,  vue, svelte)
 
 // antfu specific rules
@@ -161,6 +174,7 @@ const flat: Linter.FlatConfig[] = [
 
       ...coreRules,
       ...nodeRules,
+      ...jsdocRules,
       ...importRules,
       ...unusedImportsRules,
       ...stylisticRules,
@@ -188,7 +202,10 @@ const flat: Linter.FlatConfig[] = [
         // tsconfigRootDir: process.cwd(), // antfu
       },
     },
-    rules: typescriptRules,
+    rules: {
+      ...typescriptRules,
+      ...jsdocTsRules,
+    },
   },
   {
     /* Specific rules for test files */

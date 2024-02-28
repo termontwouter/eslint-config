@@ -9,6 +9,10 @@ const linterOptions: Config['linterOptions'] = {
   // reportUnusedDisableDirectives: true, // TODO: re-enable (antfu)
 };
 
+/**
+ *
+ * @param globals
+ */
 function mapLegacyGlobals(globals: Record<string, boolean>): Record<string, 'writable' | 'readonly'> {
   return Object.fromEntries(Object.entries<boolean>(globals).map(
     ([ global, writable ]: [string, boolean]) => [ global, writable ? 'writable' : 'readonly' ],

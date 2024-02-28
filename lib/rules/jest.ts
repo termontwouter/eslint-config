@@ -2,12 +2,6 @@ import type { Linter } from 'eslint';
 
 export const rules: Linter.RulesRecord = {
 
-//   jest/no-mocks-import
-// jest/no-conditional-expect
-
-// jest/no-alias-methods
-// jest/prefer-to-have-length
-
   /* RECOMMENDED */
   // 'jest/expect-expect': 'warn', // minor errors (css, comunica)
   // 'jest/no-alias-methods': 'error', // minor errors (comunica, componentsjs)
